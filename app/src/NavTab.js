@@ -10,7 +10,7 @@ import { Profil } from "./Profil/Profil";
 
 const Tab = createBottomTabNavigator();
 
-function MyTabs() {
+const NavTab = () => {
   return (
     <Tab.Navigator>
       <Tab.Screen name="Offres" component={Offres} options={{
