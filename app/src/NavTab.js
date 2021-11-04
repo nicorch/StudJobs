@@ -10,7 +10,6 @@ import { MaterialCommunityIcons } from '@expo/vector-icons';
 function OffersScreen() {
     return (
         <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-        <AntDesign name="bars" size={24} color="black" />
         <Text>Les offres</Text>
         </View>
     );
@@ -19,7 +18,6 @@ function OffersScreen() {
 function MessageScreen() {
     return (
         <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-        <Ionicons name="md-chatbubbles" size={24} color="black" />
         <Text>Messagerie</Text>
         </View>
     );
@@ -28,7 +26,6 @@ function MessageScreen() {
 function ProfilScreen() {
     return (
         <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-        <MaterialCommunityIcons name="face-profile" size={24} color="black" />
         <Text>Profil</Text>
         </View>
     );
@@ -40,9 +37,25 @@ const Tab = createBottomTabNavigator();
 function MyTabs() {
   return (
     <Tab.Navigator>
-      <Tab.Screen name="Offers" component={OffersScreen} />
-      <Tab.Screen name="Messages" component={MessageScreen} />
-      <Tab.Screen name="Profil" component={ProfilScreen} />
+      <Tab.Screen name="Offres" component={OffersScreen} options={{
+          tabBarLabel: 'Offres',
+          tabBarIcon: ({ color, size }) => (
+            <AntDesign name="bars" size={size} color={color} />
+          ),
+        }} />
+
+      <Tab.Screen name="Messages" component={MessageScreen} options={{
+          tabBarLabel: 'Messages',
+          tabBarIcon: ({ color, size }) => (
+            <Ionicons name="md-chatbubbles" size={size} color={color} />
+          ),
+        }} />
+      <Tab.Screen name="Profil" component={ProfilScreen} options={{
+          tabBarLabel: 'Profil',
+          tabBarIcon: ({ color, size }) => (
+            <MaterialCommunityIcons name="account-circle" size={size} color={color} />
+          ),
+        }} />
     </Tab.Navigator>
   );
 }
