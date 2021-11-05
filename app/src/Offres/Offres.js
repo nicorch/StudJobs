@@ -9,4 +9,4 @@ const Offres = () => {
     );
   }
 
-export default Offres();
+export default Offres;
