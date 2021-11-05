@@ -4,23 +4,12 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { Ionicons, AntDesign, MaterialCommunityIcons } from '@expo/vector-icons';
 import Messages from "./Messages/Messages";
-import Offres from "./Offres/Offres";
+import OffresStackNav from "./Offres/OffresStackNav";
 import Profil from "./Profil/Profil";
 
-const OffresStack = createNativeStackNavigator();
 const MessagesStack = createNativeStackNavigator();
 const ProfilStack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
-
-const OffresStackNav = () => (
-    <OffresStack.Navigator>
-      <OffresStack.Screen
-        name="ListeOffres"
-        options={{ title: "Offres Actuelles" }}
-        component={Offres}
-      />
-    </OffresStack.Navigator>
-  );
 
 const MessagesStackNav = () => (
   <MessagesStack.Navigator>
