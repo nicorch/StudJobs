@@ -1,10 +1,15 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet } from 'react-native';
 import NavTab from './src/NavTab';
 
+import * as eva from '@eva-design/eva';
+import { ApplicationProvider, Layout, Text } from '@ui-kitten/components';
 
 export default function App() {
-  return <NavTab />;
+  return (
+    <ApplicationProvider {...eva} theme={eva.light}>
+      <NavTab />
+    </ApplicationProvider>);
 
 }
 
