@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { Text, View } from 'react-native';
 
 const Profil = () => {
     return (
@@ -8,4 +9,4 @@ const Profil = () => {
     );
   }
 
-export default Profil();
+export default Profil;

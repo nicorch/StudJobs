@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { Text, View } from 'react-native';
 
 const Messages = () => {
     return (
@@ -8,4 +9,4 @@ const Messages = () => {
     );
   }
 
-export default Messages();
+export default Messages;

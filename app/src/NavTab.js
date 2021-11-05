@@ -1,39 +1,88 @@
 import * as React from 'react';
-import { Text, View } from 'react-native';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { AntDesign } from '@expo/vector-icons'; 
-import { Ionicons } from '@expo/vector-icons';
-import { MaterialCommunityIcons } from '@expo/vector-icons';
-import { Messages } from "./Messages/Messages";
-import { Offres } from "./Offres/Offres";
-import { Profil } from "./Profil/Profil";
+import { NavigationContainer } from "@react-navigation/native";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import { Ionicons, AntDesign, MaterialCommunityIcons } from '@expo/vector-icons';
+import Messages from "./Messages/Messages";
+import Offres from "./Offres/Offres";
+import Profil from "./Profil/Profil";
 
+const OffresStack = createNativeStackNavigator();
+const MessagesStack = createNativeStackNavigator();
+const ProfilStack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
+
+const OffresStackNav = () => (
+    <OffresStack.Navigator>
+      <OffresStack.Screen
+        name="ListeOffres"
+        options={{ title: "Offres Actuelles" }}
+        component={Offres}
+      />
+    </OffresStack.Navigator>
+  );
+
+const MessagesStackNav = () => (
+  <MessagesStack.Navigator>
+    <MessagesStack.Screen
+      name="Messages"
+      options={{
+        title: "Messagerie",
+      }}
+      component={Messages}
+    />
+
+  </MessagesStack.Navigator>
+);
+
+const ProfilStackNav = () => (
+    <ProfilStack.Navigator>
+      <ProfilStack.Screen
+        name="Profil"
+        options={{
+          title: "Votre Compte",
+        }}
+        component={Profil}
+      />
+    </ProfilStack.Navigator>
+  );
+
 
 const NavTab = () => {
   return (
-    <Tab.Navigator>
-      <Tab.Screen name="Offres" component={Offres} options={{
-          tabBarLabel: 'Offres',
-          tabBarIcon: ({ color, size }) => (
-            <AntDesign name="bars" size={size} color={color} />
-          ),
-        }} />
+    <NavigationContainer>
+    <Tab.Navigator
+     screenOptions={({ route }) => ({
+          headerShown: false,
+          tabBarIcon: ({ focused, color, size }) => {
+            let iconName;
 
-      <Tab.Screen name="Messages" component={Messages} options={{
-          tabBarLabel: 'Messages',
-          tabBarIcon: ({ color, size }) => (
-            <Ionicons name="md-chatbubbles" size={size} color={color} />
-          ),
-        }} />
-      <Tab.Screen name="Profil" component={Profil} options={{
-          tabBarLabel: 'Profil',
-          tabBarIcon: ({ color, size }) => (
-            <MaterialCommunityIcons name="account-circle" size={size} color={color} />
-          ),
-        }} />
+            if (route.name === "Offres") {
+              iconName = focused
+                ? "list-circle"
+                : "list-circle-outline";
+            } else if (route.name === "Profil") {
+              iconName = focused
+                ? "person-circle"
+                : "person-circle-outline";
+            } else if (route.name === "Messages"){
+              iconName = focused
+                ? "chatbubbles"
+                : "chatbubbles-outline"
+            }
+
+            // You can return any component that you like here!
+            return (
+              <Ionicons name={iconName} size={size} color={color} />
+            );
+          },
+        })}>
+        <Tab.Screen name="Offres" component={OffresStackNav} />
+        <Tab.Screen name="Messages" component={MessagesStackNav} />
+        <Tab.Screen name="Profil" component={ProfilStackNav} />
     </Tab.Navigator>
+    </NavigationContainer>
   );
 }
 
-export default NavTab();
+export default NavTab;

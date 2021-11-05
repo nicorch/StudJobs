@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { Text, View } from 'react-native';
 
 const Offres = () => {
     return (
@@ -8,4 +9,4 @@ const Offres = () => {
     );
   }
 
-export default Offres();
+export default Offres;
