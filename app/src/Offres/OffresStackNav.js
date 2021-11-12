@@ -22,10 +22,10 @@ const OffresStackNav = () => {
           title: 'Prospection de contrats',
           description: 'Prospections de contrats auprès de particuliers. Une journée débute avec un briefing à partir de 9h30 pour les objectifs de la journée. \nVous serez en mission de 11h à 14h30, s\'en suivra la pose déjeuner afin de reprendre de 16h30 à 20h',
           duration: '5 j',
-          dateDebut: null,
-          dateFin: null,
-          heureDebut: null,
-          heureFin: null,
+          dateDebut: '01/09/2021',
+          dateFin: '05/09/2021',
+          heureDebut: '09',
+          heureFin: '20',
           remuneration: {
             amount: 12,
             unity: '€/h'
