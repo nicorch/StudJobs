@@ -15,7 +15,6 @@ export default Screen;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "red",
     paddingTop: Constants.statusBarHeight
   }
 })
