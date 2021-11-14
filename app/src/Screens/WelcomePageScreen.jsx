@@ -1,13 +1,20 @@
 import React, { useState } from 'react';
 import { View, StyleSheet, Text, Image, TouchableOpacity } from 'react-native';
-import AppInputText from '../Components/AppInputText';
+import AppFormField from '../Components/forms/AppFormField';
 import AppSwitch from '../Components/AppSwitch';
 import Screen from '../Components/Screen';
 import colors from '../config/colors';
 import AppForm from "./../Components/forms/AppForm"
 import SubmitButton from "./../Components/forms/SubmitButton"
+import * as Yup from "yup"
 
 const choices = [{ id: 0, label: "étudiant" }, { id: 1, label: "profesionnel" }]
+
+const validationSchema = Yup.object().shape({
+  email: Yup.string().required().email().label("Email"),
+  password: Yup.string().required().min(4).label("Mot de passe"),
+  type: Yup.string().label("Catégorie")
+})
 
 function WelcomePageScreen(props) {
 
@@ -33,9 +40,10 @@ function WelcomePageScreen(props) {
         <View style={styles.formContainer}>
           <AppForm
             initialValues={{ email: "", password: "", type: "étudient" }}
+            validationSchema={validationSchema}
             onSubmit={values => console.log(values)}
           >
-            <AppInputText
+            <AppFormField
               name="email"
               placeholder="Adresse email"
               autoCapitalize="none"
@@ -43,7 +51,7 @@ function WelcomePageScreen(props) {
               keyboardType="email-adress"
               textContentType="emailAdress"
             />
-            <AppInputText
+            <AppFormField
               name="password"
               autoCapitalize="none"
               autoCorrect={false}
@@ -61,7 +69,6 @@ function WelcomePageScreen(props) {
                   </>
                 )
             }
-
           </AppForm>
         </View>
         {toConnect && (

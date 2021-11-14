@@ -7,11 +7,10 @@ import colors from '../config/colors';
 
 function AppInputText({ name, icon, secureTextEntry, ...otherParams }) {
 
-    const { handleChange } = useFormikContext()
     const [showPassword, setShowPassword] = useState(false)
     return (
         <View style={styles.container}>
-            <TextInput onChangeText={handleChange(name)} style={styles.inputText} secureTextEntry={showPassword} {...otherParams} />
+            <TextInput style={styles.inputText} secureTextEntry={showPassword} {...otherParams} />
             {icon && <MaterialCommunityIcons name={!showPassword ? icon + "-outline" : icon} size={22} color={!showPassword ? colors.medium : colors.blue} style={styles.icon} onPress={() => setShowPassword(!showPassword)} />}
         </View>
     );
