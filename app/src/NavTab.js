@@ -5,11 +5,10 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { Ionicons, AntDesign, MaterialCommunityIcons } from '@expo/vector-icons';
 import Messages from "./Messages/Messages";
 import Offres from "./Offres/Offres";
-import Profil from "./Profil/Profil";
+import ProfilStackNav from "./Profil/ProfilStackNav";
 
 const OffresStack = createNativeStackNavigator();
 const MessagesStack = createNativeStackNavigator();
-const ProfilStack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
 
 const OffresStackNav = () => (
@@ -35,20 +34,10 @@ const MessagesStackNav = () => (
   </MessagesStack.Navigator>
 );
 
-const ProfilStackNav = () => (
-    <ProfilStack.Navigator>
-      <ProfilStack.Screen
-        name="Profil"
-        options={{
-          title: "Votre Compte",
-        }}
-        component={Profil}
-      />
-    </ProfilStack.Navigator>
-  );
-
-
 const NavTab = () => {
+
+  
+
   return (
     <NavigationContainer>
     <Tab.Navigator
