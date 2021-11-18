@@ -1,41 +1,37 @@
 import React, { useState } from 'react';
 import {
-  FlatList,
-  SafeAreaView,
   StatusBar,
   StyleSheet,
   Text,
   Switch,
   View,
-  Image
+  Image,
+  VirtualizedList
 } from 'react-native';
 
 import profilPicture from '../../assets/profil_picture.jpg';
 import BackgroundPicture from '../../assets/background_image.svg';
 
+
 import { Card } from '@ui-kitten/components';
 
-const Profil = (profil) => {
-
-  console.log(profil);
-  
-  const [isPermisB, setIsPermisB] = useState(profil.profil.permisB);
-  const [isAvailable, setIsAvailable] = useState(profil.profil.isAvailable);
+const Profil = (user) => {
+  const profil = user.user;
+  const [isPermisB, setIsPermisB] = useState(profil.permisB);
+  const [isAvailable, setIsAvailable] = useState(profil.isAvailable);
   const toggleSwitchPermisB = () => setIsPermisB(previousState => !previousState);
   const toggleSwitchAvailable = () => setIsAvailable(previousState => !previousState);
-
+  
   return (
     
     <View>
-      <BackgroundPicture style={styles.pictureBackground}>
-        
-      </BackgroundPicture>
+      <BackgroundPicture style={styles.pictureBackground} />
       <View>
-          <Card style={styles.cardImage}>
-            <Image source={profilPicture} style={styles.profilePicture}/>
-            <Text style={styles.userName}>{profil.profil.prenom} {profil.profil.nom}</Text>
-          </Card>
-        </View>
+        <Card style={styles.cardImage}>
+          <Image source={profilPicture} style={styles.profilePicture}/>
+          <Text style={styles.userName}>{profil.prenom} {profil.nom}</Text>
+        </Card>
+      </View>
       <View style={styles.listRow}>
         <Text> Disponible
         </Text>
@@ -48,44 +44,66 @@ const Profil = (profil) => {
           style={styles.switchStyles}
         />
       </View>
-      <View style={styles.listRow}>
-        <Text>Vos Informations : 
-        </Text>
+      <View style={styles.cardInformations}>
+        <View style={styles.listRow}>
+          <Text style={styles.title}>Vos Informations : 
+          </Text>
+        </View>
+        <View style={styles.listRow}>
+          <Text> Ville : 
+          </Text>
+          <Text style={styles.infoUser}>{profil.ville}</Text>
+        </View>
+        <View style={styles.listRow}>
+          <Text> Adresse : 
+          </Text>
+          <Text style={styles.infoUser}>{profil.adresse}</Text>
+        </View>
+        <View style={styles.listRow}>
+          <Text> Numéro tel :
+          </Text>
+          <Text style={styles.infoUser}>{profil.tel}</Text>
+        </View>
+        <View style={styles.listRow}>
+          <Text> Née le :
+          </Text>
+          <Text style={styles.infoUser}>{profil.dateNaissance}</Text>
+        </View>
+        <View style={styles.listRow}>
+          <Text> Titulaire du permis B 
+          </Text>
+          <Switch
+            trackColor={{ false: '#767577', true: 'green' }}
+            thumbColor={isPermisB ? '#f4f3f4' : '#f4f3f4'}
+            ios_backgroundColor="#3e3e3e"
+            onValueChange={toggleSwitchPermisB}
+            value={isPermisB}
+            style={styles.switchStyles}
+          />
+        </View>
       </View>
-      <View style={styles.listRow}>
-        <Text> Ville : 
+      <View style={styles.cardDescription}>
+        <Text style={styles.title}>Votre description/CV : 
         </Text>
-        <Text style={styles.infoUser}>{profil.profil.ville}</Text>
-      </View>
-      <View style={styles.listRow}>
-        <Text> Adresse : 
-        </Text>
-        <Text style={styles.infoUser}>{profil.profil.adresse}</Text>
-      </View>
-      <View style={styles.listRow}>
-        <Text> Numéro tel :
-        </Text>
-        <Text style={styles.infoUser}>{profil.profil.tel}</Text>
-      </View>
-      <View style={styles.listRow}>
-        <Text> Née le :
-        </Text>
-        <Text style={styles.infoUser}>{profil.profil.dateNaissance}</Text>
-      </View>
-      <View style={styles.listRow}>
-        <Text> Titulaire du permis B 
-        </Text>
-        <Switch
-          trackColor={{ false: '#767577', true: 'green' }}
-          thumbColor={isPermisB ? '#f4f3f4' : '#f4f3f4'}
-          ios_backgroundColor="#3e3e3e"
-          onValueChange={toggleSwitchPermisB}
-          value={isPermisB}
-          style={styles.switchStyles}
-        />
+        <View style={styles.listRow}>
+          <Text>
+            {profil.etude1}
+          </Text>
+        </View>
+        <View style={styles.listRow}>
+          <Text>
+            {profil.etude2}
+          </Text>
+        </View>
+        <View style={styles.listRow}>
+          <Text>
+            {profil.etude3}
+          </Text>
+        </View>
       </View>
     </View>
   );
+
 }
 
 const styles = StyleSheet.create({
@@ -140,6 +158,20 @@ const styles = StyleSheet.create({
   },
   infoUser: {
     color: 'rgb(0,121,255)',
+  },
+  cardInformations: {
+    marginTop: 20,
+    borderColor: 'black',
+    borderStyle: 'solid',
+    borderTopWidth:1,
+    paddingTop:0
+  },
+  cardDescription: {
+    marginTop: 20,
+    borderColor: 'black',
+    borderStyle: 'solid',
+    borderTopWidth:1,
+    paddingTop:20
   }
 });
 

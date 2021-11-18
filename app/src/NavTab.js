@@ -35,9 +35,7 @@ const MessagesStackNav = () => (
 );
 
 const NavTab = () => {
-
   
-
   return (
     <NavigationContainer>
     <Tab.Navigator
