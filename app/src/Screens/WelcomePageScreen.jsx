@@ -61,7 +61,12 @@ function WelcomePageScreen(props) {
               icon="eye"
             />
             {
-              toConnect ? <SubmitButton title="Se connecter" />
+              toConnect ? (
+                <>
+                  <SubmitButton title="Se connecter" />
+                  <Text style={styles.forgotPassword}>Mot de passe oublié ?</Text>
+                </>
+              )
                 : (
                   <>
                     <AppSwitch items={choices} name="type" />
@@ -71,11 +76,6 @@ function WelcomePageScreen(props) {
             }
           </AppForm>
         </View>
-        {toConnect && (
-          <View style={styles.forgetPassword}>
-            <Text style={{ color: colors.blue }}>Mot de passe oublié ?</Text>
-          </View>
-        )}
       </View>
     </Screen>
   );
@@ -133,11 +133,9 @@ const styles = StyleSheet.create({
     top: 350, width: "100%",
     paddingHorizontal: 30
   },
-  forgetPassword: {
-    position: "absolute",
-    top: 560,
-    width: "100%",
-    paddingHorizontal: 30,
-    marginTop: 20
+  forgotPassword: {
+    color: colors.blue,
+    marginTop: 10,
+    width: "100%"
   }
 })
