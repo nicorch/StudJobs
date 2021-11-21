@@ -11,7 +11,7 @@ function AppSwitch({ name, items }) {
 
   const handleChoice = (id) => {
     setSelectedItem(id)
-    setFieldValue(name, items[0].label)
+    setFieldValue(name, items[id].label)
   }
 
   return (
