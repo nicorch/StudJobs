@@ -5,7 +5,6 @@ import { Ionicons, AntDesign, MaterialCommunityIcons } from '@expo/vector-icons'
 
 
 const OffreDetailsModal = ({isVisible,offre,onClosePress}) => {
-  console.log('offre',offre);
   return (
   <Modal
     animationType = {"slide"}

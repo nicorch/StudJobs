@@ -1,29 +1,40 @@
 import React from "react";
-import { ActivityIndicator, ScrollView, View } from "react-native";
+import { SearchBar, Badge, withBadge } from 'react-native-elements';
+import { ActivityIndicator, StyleSheet, ScrollView, View } from "react-native";
 import Offres from "./Offres";
 import OffreDetailsModal from "./OffreDetailsModal";
+import OffresFiltersModal from "./OffresFiltersModal";
+import { FontAwesome, MaterialCommunityIcons } from '@expo/vector-icons'; 
 
-const OffresScreen = ({ data, loading, setData }) => {
+const offreTemplateObject = {
+  _id: '00',
+  type: 'none',
+  entreprise: {
+    name: 'none',
+    avatar: '00'
+  },
+  location: {
+    city: ''
+  },
+  title: 'none',
+  description: 'none',
+  duration: 'none',
+  dateDebut: null,
+  dateFin: null,
+  heureDebut: null,
+  heureFin: null,
+  remuneration: {
+    amount: 0,
+    unity: '€/h'
+  }
+}
+
+const OffresScreen = ({ data, loading, setData, setSearch }) => {
   const [isModalVisible, setModalVisible] = React.useState(false);
-  const [offreOpened, setOffreOpened] = React.useState({
-    _id: '00',
-    type: 'none',
-    entreprise: {
-      name: 'none',
-      avatar: '00'
-    },
-    title: 'none',
-    description: 'none',
-    duration: 'none',
-    dateDebut: null,
-    dateFin: null,
-    heureDebut: null,
-    heureFin: null,
-    remuneration: {
-      amount: 0,
-      unity: '€/h'
-    }
-  });
+  const [isModalVisibleFilters, setFiltersVisible] = React.useState(false);
+  const [offreOpened, setOffreOpened] = React.useState(offreTemplateObject);
+  const [nbFilters, setNbFilters] = React.useState(0);
+  const [search] = React.useState(null);
 
   const toggleOffreHandler = (offreId) => {
     const newData = data.map((offre) => {
@@ -37,22 +48,88 @@ const OffresScreen = ({ data, loading, setData }) => {
     });
     setData(newData);
   };
-  const toggleCloseOffreHandler = (offreId) => {
+  const toggleOpenFilterHandler = () => {
+    setFiltersVisible(true);
+  };
+  const toggleCloseFilterHandler = () => {
+    setFiltersVisible(false);
+  };
+  const toggleSaveFilterHandler = (filters) => {
+    setFiltersVisible(false);
+    setNbFilters(filters.nbFiltres);
+    console.log('TOP filters -->',filters);
+  };
+  const toggleCloseOffreHandler = () => {
     setModalVisible(false);
   };
 
+  const updateSearch = (search) => {
+    if (search && search.length >= 2) {
+      setSearch(search)
+    } else setSearch(null);
+  };
+
+  const FilterIcon = (<MaterialCommunityIcons name={nbFilters ? 'filter-remove' : 'filter'} size={24} color="black" style={styles.filter_btn} onPress={toggleOpenFilterHandler}/>);
+  const BadgedIcon = withBadge(nbFilters,{left: 0,top: 2})(() => FilterIcon);
+
   return (
     <View>
-      {loading ? (
+      <View style={styles.row_seacrh}>
+        <SearchBar
+          placeholder="Rechercher"
+          onChangeText={updateSearch}
+          onCancel={updateSearch}
+          onClear={updateSearch}
+          round={true}
+          // showLoading={true}
+          platform="ios"
+          value={search}
+          containerStyle={styles.searchContainer}
+          inputContainerStyle={styles.searchInputContainer}
+          inputStyle={styles.searchInput}
+          showCancel={false}
+          cancelButtonProps={{buttonStyle: {display: 'none'}}}
+          />
+          { nbFilters ? <BadgedIcon /> : FilterIcon }
+          </View> 
+      {(loading) ? (
         <ActivityIndicator />
       ) : (
-        <ScrollView contentContainerStyle={{ padding: 16 }}>
-          <Offres offres={data} onOffrePress={toggleOffreHandler} />
-          <OffreDetailsModal isVisible={isModalVisible} offre={offreOpened} onClosePress={toggleCloseOffreHandler}/>
-        </ScrollView>
+        <View>
+          <ScrollView contentContainerStyle={{ padding: 16 }}>
+            <Offres offres={data} onOffrePress={toggleOffreHandler} />
+            <OffreDetailsModal isVisible={isModalVisible} offre={offreOpened} onClosePress={toggleCloseOffreHandler}/>
+          </ScrollView>
+          <OffresFiltersModal 
+            isVisible={isModalVisibleFilters}  
+            onClosePress={toggleCloseFilterHandler}
+            onSavePress={toggleSaveFilterHandler}
+          />
+        </View>
       )}
     </View>
   );
 };
 
 export default OffresScreen;
+
+const styles = StyleSheet.create({
+  searchContainer: {
+    height: 50
+  },
+  searchInputContainer: {
+    height: 40,
+    left: 55,
+    marginEnd: 55,
+  },
+  row_seacrh: {
+    flexDirection: 'row',
+    justifyContent: 'flex-end'
+  },
+  filter_btn: {
+    padding: 13,
+    paddingEnd: 15,
+    backgroundColor: 'white'
+  },
+  
+});
