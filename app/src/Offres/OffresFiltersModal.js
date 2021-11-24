@@ -253,7 +253,7 @@ const OffresFiltersModal = ({isVisible,onClosePress, onSavePress}) => {
               <View style={styles.fieldContainer}>
                   <Text style={styles.labelField}>Heure - Début min </Text>
                   <RNDateTimePicker
-                    testID="dateTimePicker"
+                    testID="dateTimePickerDebut"
                     value={debutHMin}
                     mode={'time'}
                     display="compact"
@@ -280,7 +280,7 @@ const OffresFiltersModal = ({isVisible,onClosePress, onSavePress}) => {
               <View style={styles.fieldContainer}>
                   <Text style={styles.labelField}>Heure - Début max </Text>
                   <RNDateTimePicker
-                    testID="dateTimePicker"
+                    testID="dateTimePickerDebutMax"
                     value={debutHMax}
                     mode={'time'}
                     display="compact"
@@ -307,7 +307,7 @@ const OffresFiltersModal = ({isVisible,onClosePress, onSavePress}) => {
               <View style={styles.fieldContainer}>
                   <Text style={styles.labelField}>Heure - Fin min </Text>
                   <RNDateTimePicker
-                    testID="dateTimePicker"
+                    testID="dateTimePickerFin"
                     value={finHMin}
                     mode={'time'}
                     display="compact"
@@ -334,7 +334,7 @@ const OffresFiltersModal = ({isVisible,onClosePress, onSavePress}) => {
               <View style={styles.fieldContainer}>
                   <Text style={styles.labelField}>Heure - Fin max </Text>
                   <RNDateTimePicker
-                    testID="dateTimePicker"
+                    testID="dateTimePickerFinMax"
                     value={finHMax}
                     mode={'time'}
                     display="compact"
