@@ -7,7 +7,9 @@ import WelcomePageScreen from './src/Screens/WelcomePageScreen';
 
 export default function App() {
   return (
-    <WelcomePageScreen />
+    <NavigationContainer>
+      <NavTab />
+    </NavigationContainer>
   );
 }
 
