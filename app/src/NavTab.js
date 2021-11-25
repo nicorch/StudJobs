@@ -6,6 +6,9 @@ import { Ionicons, AntDesign, MaterialCommunityIcons } from '@expo/vector-icons'
 import Messages from "./Messages/Messages";
 import OffresStackNav from "./Offres/OffresStackNav";
 import ProfilStackNav from "./Profil/ProfilStackNav";
+import AuthNavigation from "./Navigation/AuthNavigation"
+import NavigationTheme from "./Navigation/NavigationTheme"
+
 
 const MessagesStack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -24,11 +27,11 @@ const MessagesStackNav = () => (
 );
 
 const NavTab = () => {
-  
+
   return (
-    <NavigationContainer>
-    <Tab.Navigator
-     screenOptions={({ route }) => ({
+    <NavigationContainer theme={NavigationTheme}>
+      <Tab.Navigator
+        screenOptions={({ route }) => ({
           headerShown: false,
           tabBarIcon: ({ focused, color, size }) => {
             let iconName;
@@ -41,7 +44,7 @@ const NavTab = () => {
               iconName = focused
                 ? "person-circle"
                 : "person-circle-outline";
-            } else if (route.name === "Messages"){
+            } else if (route.name === "Messages") {
               iconName = focused
                 ? "chatbubbles"
                 : "chatbubbles-outline"
@@ -56,7 +59,7 @@ const NavTab = () => {
         <Tab.Screen name="Offres" component={OffresStackNav} />
         <Tab.Screen name="Messages" component={MessagesStackNav} />
         <Tab.Screen name="Profil" component={ProfilStackNav} />
-    </Tab.Navigator>
+      </Tab.Navigator>
     </NavigationContainer>
   );
 }
