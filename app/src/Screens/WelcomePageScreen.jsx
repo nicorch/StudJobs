@@ -16,7 +16,7 @@ const validationSchema = Yup.object().shape({
   type: Yup.string().label("Catégorie")
 })
 
-function WelcomePageScreen(props) {
+function WelcomePageScreen({ navigation }) {
 
   const [toConnect, setToConnect] = useState(true)
 
