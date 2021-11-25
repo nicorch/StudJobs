@@ -1,16 +1,20 @@
-import { StatusBar } from 'expo-status-bar';
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+
+import { StyleSheet, View } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
-import { NavTab } from './src/NavTab'
 import WelcomePageScreen from './src/Screens/WelcomePageScreen';
+import NavTab from './src/NavTab';
+
+import * as eva from '@eva-design/eva';
+import { ApplicationProvider, Layout, Text } from '@ui-kitten/components';
+
 
 export default function App() {
   return (
-    <NavigationContainer>
+    <ApplicationProvider {...eva} theme={eva.light}>
       <NavTab />
-    </NavigationContainer>
-  );
+    </ApplicationProvider>);
+
 }
 
 const styles = StyleSheet.create({
