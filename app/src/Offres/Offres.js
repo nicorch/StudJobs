@@ -1,12 +1,10 @@
-import * as React from 'react';
-import { Text, View } from 'react-native';
+import * as React from "react";
+import Offre from "./Offre";
 
-const Offres = () => {
-    return (
-        <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-        <Text>Les Offres</Text>
-        </View>
-    );
-  }
+const Offres = ({ offres, onOffrePress }) => {
+  return offres.map((offre) => (
+    <Offre offre={offre} onPress={onOffrePress} />
+  ));
+};
 
-export default Offres();
+export default Offres;
