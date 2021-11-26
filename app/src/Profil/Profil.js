@@ -8,19 +8,22 @@ import {
   Image,
   VirtualizedList
 } from 'react-native';
-
+import { Ionicons } from '@expo/vector-icons';
 import profilPicture from '../../assets/profil_picture.jpg';
 import BackgroundPicture from '../../assets/background_image.svg';
 
 
 import { Card } from '@ui-kitten/components';
 
-const Profil = (user) => {
-  const profil = user.user;
+const Profil = ({user, onProfilPress}) => {
+  const profil = user;
   const [isPermisB, setIsPermisB] = useState(profil.permisB);
   const [isAvailable, setIsAvailable] = useState(profil.isAvailable);
   const toggleSwitchPermisB = () => setIsPermisB(previousState => !previousState);
   const toggleSwitchAvailable = () => setIsAvailable(previousState => !previousState);
+  const toggleCloseModalModifProfil = () => {
+    setModalVisible(false);
+  };
   
   return (
     
@@ -48,6 +51,7 @@ const Profil = (user) => {
         <View style={styles.listRow}>
           <Text style={styles.title}>Vos Informations : 
           </Text>
+          <Ionicons name='create-outline' style={styles.editIcons} onPress={() => onProfilPress(user)}></Ionicons>
         </View>
         <View style={styles.listRow}>
           <Text> Ville : 
@@ -172,6 +176,9 @@ const styles = StyleSheet.create({
     borderStyle: 'solid',
     borderTopWidth:1,
     paddingTop:20
+  },
+  editIcons:{
+    fontSize: 28
   }
 });
 

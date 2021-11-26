@@ -9,6 +9,7 @@ const ProfilStack = createNativeStackNavigator();
 const ProfilStackNav = () => {
     const [data, setData] = React.useState([]);
     const [loading, setLoading] = React.useState(true);
+    const [user, setUser] = React.useState([]);
     
     const fetchData = () => {
       return (
@@ -66,6 +67,7 @@ const ProfilStackNav = () => {
             user={data}
             loading={loading}
             setData={setData}
+            setUser={setUser}
           />
         )}
 
