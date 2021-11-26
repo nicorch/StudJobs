@@ -6,7 +6,6 @@ import * as Yup from "yup"
 import AppFormField from '../Components/forms/AppFormField';
 import SubmitButton from '../Components/forms/SubmitButton';
 
-
 const initialV = {
   firstname: "",
   lastname: "",
@@ -34,7 +33,7 @@ const validationSchemaPro = Yup.object().shape({
 const etu = { firstname: "Prénom", lastname: "Nom", adress: "Adresse complète" }
 const pro = { firstname: "Prénom de contact", lastname: "Nom de contact", adress: "Adresse de l'entreprise" }
 
-function InscriptionPageScreen({ type = "étudiant" }) {
+function InscriptionPageScreen({ route, type = "étudiant" }) {
 
   const [student, setStudent] = useState(type === "étudiant" ? false : true)
 
@@ -52,7 +51,7 @@ function InscriptionPageScreen({ type = "étudiant" }) {
           <AppForm
             initialValues={initialValues}
             validationSchema={validationSchema}
-            onSubmit={(values) => console.log(values)}
+            onSubmit={(values) => console.log({ ...route.params, ...values })}
           >
             {!student &&
               <AppFormField

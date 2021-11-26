@@ -16,11 +16,23 @@ const validationSchema = Yup.object().shape({
   type: Yup.string().label("Catégorie")
 })
 
-function WelcomePageScreen(props) {
+function WelcomePageScreen({ navigation }) {
 
-  const [toConnect, setToConnect] = useState(true)
+  const [cnx, setCnx] = useState(true)
 
-  const handleToConnect = () => setToConnect(!toConnect)
+  const handleToConnect = (type) => {
+    if (type === "cnx")
+      setCnx(true)
+    else if (type === "insc")
+      setCnx(false)
+  }
+
+  const handleOnSubmit = (values) => {
+    if (cnx)
+      console.log({ email: values.email, password: values.password })
+    else if (!cnx)
+      navigation.navigate("Inscription", values)
+  }
 
   return (
     <Screen>
@@ -30,18 +42,18 @@ function WelcomePageScreen(props) {
           <Text style={styles.text}>Bienvenue</Text>
         </View>
         <View style={styles.switcherContainer}>
-          <TouchableOpacity onPress={handleToConnect} style={toConnect ? [styles.mode, styles.modeActive] : styles.mode}>
-            <Text style={toConnect ? [styles.textMode, styles.textModeActive] : styles.textMode} >Se connecter</Text>
+          <TouchableOpacity onPress={() => handleToConnect("cnx")} style={cnx ? [styles.mode, styles.modeActive] : styles.mode}>
+            <Text style={cnx ? [styles.textMode, styles.textModeActive] : styles.textMode} >Se connecter</Text>
           </TouchableOpacity>
-          <TouchableOpacity onPress={handleToConnect} style={!toConnect ? [styles.mode, styles.modeActive] : styles.mode}>
-            <Text style={!toConnect ? [styles.textMode, styles.textModeActive] : styles.textMode} >S'inscrire</Text>
+          <TouchableOpacity onPress={() => handleToConnect("insc")} style={!cnx ? [styles.mode, styles.modeActive] : styles.mode}>
+            <Text style={!cnx ? [styles.textMode, styles.textModeActive] : styles.textMode} >S'inscrire</Text>
           </TouchableOpacity>
         </View>
         <View style={styles.formContainer}>
           <AppForm
             initialValues={{ email: "", password: "", type: "étudient" }}
             validationSchema={validationSchema}
-            onSubmit={values => console.log(values)}
+            onSubmit={handleOnSubmit}
           >
             <AppFormField
               name="email"
@@ -61,7 +73,7 @@ function WelcomePageScreen(props) {
               icon="eye"
             />
             {
-              toConnect ? (
+              cnx ? (
                 <>
                   <SubmitButton title="Se connecter" />
                   <Text style={styles.forgotPassword}>Mot de passe oublié ?</Text>
