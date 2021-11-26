@@ -2,6 +2,8 @@ import React from "react";
 import { SearchBar, Badge, withBadge } from 'react-native-elements';
 import { ActivityIndicator, StyleSheet, ScrollView, View } from "react-native";
 import Offres from "./Offres";
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
 import OffreDetailsModal from "./OffreDetailsModal";
 import OffresFiltersModal from "./OffresFiltersModal";
 import { FontAwesome, MaterialCommunityIcons } from '@expo/vector-icons'; 
@@ -29,12 +31,13 @@ const offreTemplateObject = {
   }
 }
 
-const OffresScreen = ({ data, loading, setData, setSearch }) => {
+const OffresScreen = ({ data, loading, setData, setFilters }) => {
   const [isModalVisible, setModalVisible] = React.useState(false);
   const [isModalVisibleFilters, setFiltersVisible] = React.useState(false);
   const [offreOpened, setOffreOpened] = React.useState(offreTemplateObject);
   const [nbFilters, setNbFilters] = React.useState(0);
-  const [search] = React.useState(null);
+  const [search,setSearch] = React.useState(null);
+  const [filters,setFiltersModal] = React.useState(null);
 
   const toggleOffreHandler = (offreId) => {
     const newData = data.map((offre) => {
@@ -54,10 +57,18 @@ const OffresScreen = ({ data, loading, setData, setSearch }) => {
   const toggleCloseFilterHandler = () => {
     setFiltersVisible(false);
   };
-  const toggleSaveFilterHandler = (filters) => {
-    setFiltersVisible(false);
-    setNbFilters(filters.nbFiltres);
-    console.log('TOP filters -->',filters);
+  const toggleSaveFilterHandler = async () => {
+    try {
+      let filtres = await AsyncStorage.getItem('filters');
+      if (filtres) {
+        filtres = JSON.parse(filtres);
+        setFilters({...filtres, search: search});
+        setNbFilters(filtres.nbFiltres);
+      }
+      setFiltersVisible(false);
+    } catch (error) {
+      console.log(error);      
+    }
   };
   const toggleCloseOffreHandler = () => {
     setModalVisible(false);
@@ -65,9 +76,13 @@ const OffresScreen = ({ data, loading, setData, setSearch }) => {
 
   const updateSearch = (search) => {
     if (search && search.length >= 2) {
-      setSearch(search)
+      setSearch(search);
     } else setSearch(null);
   };
+
+  React.useEffect(() => {
+    setFilters((prevState) => ({...prevState, search: search}));
+  },[search])
 
   const FilterIcon = (<MaterialCommunityIcons name={nbFilters ? 'filter-remove' : 'filter'} size={24} color="black" style={styles.filter_btn} onPress={toggleOpenFilterHandler}/>);
   const BadgedIcon = withBadge(nbFilters,{left: 0,top: 2})(() => FilterIcon);
