@@ -8,6 +8,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import * as eva from '@eva-design/eva';
 import { ApplicationProvider, Layout, Text } from '@ui-kitten/components';
+import Providers from './src/Navigation';
 
 
 export default function App() {
@@ -17,14 +18,12 @@ export default function App() {
       await AsyncStorage.removeItem('filters');
     } catch (error) {
       console.log(
-        'err',error
+        'err', error
       );
     }
-  },[])
-  return (
-    <ApplicationProvider {...eva} theme={eva.light}>
-      <NavTab />
-    </ApplicationProvider>);
+  }, [])
+
+  return <Providers />
 
 }
 

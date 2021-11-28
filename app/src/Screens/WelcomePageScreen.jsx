@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { View, StyleSheet, Text, Image, TouchableOpacity } from 'react-native';
 import AppFormField from '../Components/forms/AppFormField';
 import AppSwitch from '../Components/AppSwitch';
@@ -7,6 +7,7 @@ import colors from '../config/colors';
 import AppForm from "./../Components/forms/AppForm"
 import SubmitButton from "./../Components/forms/SubmitButton"
 import * as Yup from "yup"
+import { AuthContext } from "./../Navigation/AuthProvider"
 
 const choices = [{ id: 0, label: "étudiant" }, { id: 1, label: "profesionnel" }]
 
@@ -27,11 +28,17 @@ function WelcomePageScreen({ navigation }) {
       setCnx(false)
   }
 
+  const { register, login } = useContext(AuthContext)
+
   const handleOnSubmit = (values) => {
-    if (cnx)
-      console.log({ email: values.email, password: values.password })
-    else if (!cnx)
-      navigation.navigate("Inscription", values)
+    if (cnx) {
+      login(values.email, values.password)
+    }
+    else if (!cnx) {
+      register(values.email, values.password)
+      //navigation.navigate("Inscription", values)
+    }
+
   }
 
   return (
