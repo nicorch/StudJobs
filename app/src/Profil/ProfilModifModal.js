@@ -14,10 +14,24 @@ import Profil from './Profil';
 import AppForm from '../Components/forms/AppForm';
 import AppFormField from '../Components/forms/AppFormField';
 import SubmitButton from '../Components/forms/SubmitButton';
+import * as Yup from 'yup';
 
+const validationSchemaObject = Yup.object().shape({
+  prenom: Yup.string().required().label("Prénom"),
+  nom: Yup.string().required().label("Nom"),
+  ville: Yup.string().required().label("Ville"),
+  adresse: Yup.string().required().label("Adresse"),
+  tel: Yup.string().required().positive().lessThan(11).moreThan(9).label("Numéro de téléphone"),
+  dateNaissance: Yup.string().required().label("Date de naissance"),
+});
+const etu = { prenom: "Prénom", nom: "Nom", ville: "Ville", dateNaissance: "Date de naissance", tel: "Numéro de téléphone", adresse: "Adresse"}
 
 const ProfilModifModal = ({isProfilVisible, user, onCloseProfilPress}) => {
   console.log(user);
+
+  let placeholders = etu;
+  let initialValues = {ville:user.ville, adresse:user.adresse, tel: user.tel, dateNaisse: user.dateNaissance};
+  let validationSchema = validationSchemaObject;
     return (
         <Modal
           animationType = {"slide"}
@@ -28,31 +42,44 @@ const ProfilModifModal = ({isProfilVisible, user, onCloseProfilPress}) => {
             <Text category='h6'>Modifier le profil </Text>
           </View>
           <AppForm
-            initialValues={user}
+            initialValues={initialValues}
+            validationSchema={validationSchema}
           >
+            <AppFormField
+              name="prenom"
+              placeholder="Prénom"
+              autoCorrect={false}
+              placeholder={placeholders.prenom}
+            />
+            <AppFormField
+              name="nom"
+              placeholder="Nom"
+              autoCorrect={false}
+              placeholder={placeholders.nom}
+            />
             <AppFormField
               name="ville"
               placeholder="Ville"
               autoCorrect={false}
-              value={user.ville}
+              placeholder={placeholders.ville}
             />
             <AppFormField
               name="adresse"
               placeholder="Adresse"
               autoCorrect={false}
-              value={user.adresse}
+              placeholder={placeholders.adresse}
             />
             <AppFormField
               name="tel"
               placeholder="Numéro de tel"
               autoCorrect={false}
-              value={user.tel}
+              placeholder={placeholders.tel}
             />
             <AppFormField
               name="dateNaissance"
               placeholder="Née le"
               autoCorrect={false}
-              value={user.dateNaissance}
+              placeholder={placeholders.dateNaissance}
             />
             <View style={styles.submit}>
               <SubmitButton title="Enregistrer" color="violet" />
