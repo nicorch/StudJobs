@@ -11,9 +11,13 @@ import {
   TextInput
 } from 'react-native';
 import Profil from './Profil';
+import AppForm from '../Components/forms/AppForm';
+import AppFormField from '../Components/forms/AppFormField';
+import SubmitButton from '../Components/forms/SubmitButton';
 
 
 const ProfilModifModal = ({isProfilVisible, user, onCloseProfilPress}) => {
+  console.log(user);
     return (
         <Modal
           animationType = {"slide"}
@@ -23,31 +27,38 @@ const ProfilModifModal = ({isProfilVisible, user, onCloseProfilPress}) => {
           <View style={[styles.header]}>
             <Text category='h6'>Modifier le profil </Text>
           </View>
-          <View >
-            <Text>Ville : </Text>
-            <TextInput>
-              {user.ville}
-            </TextInput>
-          </View>
-          <View >
-            <Text>Adresse : </Text>
-            <TextInput>
-              {user.adresse}
-            </TextInput>
-          </View>
-          <View >
-            <Text>Numéro tel : </Text>
-            <TextInput>
-              {user.tel}
-            </TextInput>
-          </View>
-          <View >
-            <Text>Né le : </Text>
-            <TextInput>
-              {user.dateNaissance}
-            </TextInput>
-          </View>
-          <Button onPress={() => onCloseProfilPress()}></Button>
+          <AppForm
+            initialValues={user}
+          >
+            <AppFormField
+              name="ville"
+              placeholder="Ville"
+              autoCorrect={false}
+              value={user.ville}
+            />
+            <AppFormField
+              name="adresse"
+              placeholder="Adresse"
+              autoCorrect={false}
+              value={user.adresse}
+            />
+            <AppFormField
+              name="tel"
+              placeholder="Numéro de tel"
+              autoCorrect={false}
+              value={user.tel}
+            />
+            <AppFormField
+              name="dateNaissance"
+              placeholder="Née le"
+              autoCorrect={false}
+              value={user.dateNaissance}
+            />
+            <View style={styles.submit}>
+              <SubmitButton title="Enregistrer" color="violet" />
+            </View>
+            </AppForm>
+            
         </Modal>
     )
 }
@@ -128,6 +139,13 @@ const styles = StyleSheet.create({
       borderBottomWidth: 0.25,
       textAlign: 'center'
     },
+    submit: {
+      paddingTop: 20
+    },
+    textSubmit: {
+      paddingTop: 10,
+      textAlign: "center"
+    }
 });
 
 export default ProfilModifModal;
