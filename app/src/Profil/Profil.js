@@ -51,7 +51,7 @@ const Profil = ({user, onProfilPress}) => {
         <View style={styles.listRow}>
           <Text style={styles.title}>Vos Informations : 
           </Text>
-          <Ionicons name='create-outline' style={styles.editIcons} onPress={() => onProfilPress(user)}></Ionicons>
+          <Ionicons name='create-outline' style={styles.editIcons} onPress={() => onProfilPress(user)} ></Ionicons>
         </View>
         <View style={styles.listRow}>
           <Text> Ville : 

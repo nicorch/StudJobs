@@ -102,7 +102,7 @@ function InscriptionPageScreen({ route, type = "étudiant" }) {
           </AppForm>
         </View>
       </View>
-    </Screen >
+    </Screen>
   );
 }
 
