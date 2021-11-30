@@ -16,6 +16,13 @@ const ProfilScreen = ({ user, loading, updateProfil, setUser }) => {
         setModalProfilVisible(false);
     }
 
+    const toggleUpdateProfilHandler = (values) => {
+        
+        setUser(values);
+        setModalProfilVisible(false);
+    }
+
+
     return (
         <View>
             {loading ? (
@@ -23,7 +30,7 @@ const ProfilScreen = ({ user, loading, updateProfil, setUser }) => {
             ) : (
             <ScrollView contentContainerStyle={{ padding: 16 }}>
                 <Profil user={user} onProfilPress={toggleProfilHandler}/>
-                <ProfilModifModal isProfilVisible={isModalProfilVisible} user={user} onClosePress={toggleCloseProfilHandler}/>
+                <ProfilModifModal isProfilVisible={isModalProfilVisible} user={user} onCloseProfilPress={toggleCloseProfilHandler} onSavePress={toggleUpdateProfilHandler}/>
             </ScrollView>
             )}
         </View>

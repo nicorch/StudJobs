@@ -32,7 +32,7 @@ const Profil = ({user, onProfilPress}) => {
       <View>
         <Card style={styles.cardImage}>
           <Image source={profilPicture} style={styles.profilePicture}/>
-          <Text style={styles.userName}>{profil.prenom} {profil.nom}</Text>
+          <Text style={styles.userName}>{profil.firstName} {profil.name}</Text>
         </Card>
       </View>
       <View style={styles.listRow}>
@@ -56,7 +56,7 @@ const Profil = ({user, onProfilPress}) => {
         <View style={styles.listRow}>
           <Text> Ville : 
           </Text>
-          <Text style={styles.infoUser}>{profil.ville}</Text>
+          <Text style={styles.infoUser}>{profil.city}</Text>
         </View>
         <View style={styles.listRow}>
           <Text> Adresse : 
@@ -69,9 +69,9 @@ const Profil = ({user, onProfilPress}) => {
           <Text style={styles.infoUser}>{profil.tel}</Text>
         </View>
         <View style={styles.listRow}>
-          <Text> Née le :
+          <Text> Age : 
           </Text>
-          <Text style={styles.infoUser}>{profil.dateNaissance}</Text>
+          <Text style={styles.infoUser}>{profil.age}</Text>
         </View>
         <View style={styles.listRow}>
           <Text> Titulaire du permis B 

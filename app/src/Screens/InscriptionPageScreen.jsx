@@ -98,7 +98,6 @@ function InscriptionPageScreen({ route, type = "étudiant" }) {
               <Text style={styles.textSubmit}>Vous pourrez modifier votre profil plus tard</Text>
             </View>
 
-
           </AppForm>
         </View>
       </View>

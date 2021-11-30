@@ -1,17 +1,16 @@
-import React from 'react';
+import { Button, Text, } from '@ui-kitten/components';
+import React, { useState } from 'react';
 import {
   StatusBar,
   StyleSheet,
   Modal,
   View,
-  Text
+  TextInput
 } from 'react-native';
 
-import AppForm from '../Components/forms/AppForm';
-import AppFormField from '../Components/forms/AppFormField';
-import SubmitButton from '../Components/forms/SubmitButton';
 import * as Yup from 'yup';
 import { AntDesign } from '@expo/vector-icons';
+import { Formik } from 'formik';
 
 const validationSchemaObject = Yup.object().shape({
   prenom: Yup.string().required().label("Prénom"),
@@ -21,16 +20,22 @@ const validationSchemaObject = Yup.object().shape({
   tel: Yup.number().required().positive().lessThan(11).moreThan(9).label("Numéro de téléphone"),
   dateNaissance: Yup.string().required().label("Date de naissance"),
 });
-
 const etu = { prenom: "Prénom", nom: "Nom", ville: "Ville", dateNaissance: "Date de naissance", tel: "Numéro de téléphone", adresse: "Adresse" }
+const initialV = {
+  name: "Bidaud",
+  firstName: "Antoine",
+  city: "Bordeaux",
+  age: "23",
+  tel: "0631550378",
+  adresse: "25 rue Fernand Belliard"
+}
 
-const ProfilModifModal = ({ isProfilVisible, user, onClosePress }) => {
+const ProfilModifModal = ({ isProfilVisible, user, onCloseProfilPress, type, onSavePress }) => {
 
   let placeholders = etu;
-  let initialValues = { prenom: user.prenom, nom: user.nom, ville: user.ville, adresse: user.adresse, tel: user.tel, dateNaissance: user.dateNaissance };
+  //let initialValues = {prenom: user.prenom, nom: user.nom, ville:user.ville, adresse:user.adresse, tel: user.tel, dateNaisse: user.dateNaissance};
   let validationSchema = validationSchemaObject;
-  console.log(initialValues);
-  console.log(placeholders);
+  let initialValues = initialV;
 
   return (
     <Modal
@@ -40,29 +45,54 @@ const ProfilModifModal = ({ isProfilVisible, user, onClosePress }) => {
       visible={isProfilVisible}>
       <View style={[styles.header]}>
         <Text category='h6'>Modifier le profil </Text>
-        <AntDesign name="closecircle" size={16} color="grey" onPress={() => onClosePress()}/>
+        <AntDesign name="closecircle" size={16} color="grey" onPress={() => onCloseProfilPress()} />
       </View>
-      <AppForm
-        initialValues={{prenom: 'Antoine'}}
-        validationSchema={validationSchema}
-        onSubmit={(values) => console.log(values)}
+      <Formik
+        initialValues={user}
+        onSubmit={(values) => onSavePress(values)}
       >
-
-        <Text style={styles.textSubmit}>Prénom : </Text>
-
-        <AppFormField
-          name="prenom"
-          placeholder="Prénom"
-          autoCorrect={false}
-          placeholder={placeholders.prenom}
-
-        />
-
-        <View style={styles.submit}>
-          <SubmitButton title="Enregistrer" color="violet" />
-        </View>
-      </AppForm>
-
+        {({ handleChange, handleBlur, handleSubmit, values }) => (
+          <View>
+            <TextInput
+              onChangeText={handleChange('name')}
+              onBlur={handleBlur('name')}
+              value={values.name}
+              style={styles.inputText}
+            />
+            <TextInput
+              onChangeText={handleChange('firstName')}
+              onBlur={handleBlur('firstName')}
+              value={values.firstName}
+              style={styles.inputText}
+            />
+            <TextInput
+              onChangeText={handleChange('city')}
+              onBlur={handleBlur('city')}
+              value={values.city}
+              style={styles.inputText}
+            />
+            <TextInput
+              onChangeText={handleChange('age')}
+              onBlur={handleBlur('age')}
+              value={values.age}
+              style={styles.inputText}
+            />
+            <TextInput
+              onChangeText={handleChange('tel')}
+              onBlur={handleBlur('tel')}
+              value={values.tel}
+              style={styles.inputText}
+            />
+            <TextInput
+              onChangeText={handleChange('adresse')}
+              onBlur={handleBlur('adresse')}
+              value={values.adresse}
+              style={styles.inputText}
+            />
+            <Button style={styles.submitButton} onPress={handleSubmit} title="Submit">Enregistrer</Button>
+          </View>
+        )}
+      </Formik>
     </Modal>
   )
 }
@@ -72,6 +102,16 @@ const styles = StyleSheet.create({
     flex: 1,
     marginTop: StatusBar.currentHeight || 0,
     flexDirection: 'row'
+  },
+  inputText: {
+    width: "60%",
+    flexDirection: "row",
+    borderColor: "#f6f8fd",
+    borderRadius: 5,
+    borderWidth: 2,
+    padding: 10,
+    marginHorizontal: 75,
+    marginVertical: 10,
   },
   title: {
     fontSize: 20,
@@ -143,10 +183,11 @@ const styles = StyleSheet.create({
     borderBottomWidth: 0.25,
     textAlign: 'center'
   },
-  submit: {
-    paddingTop: 20,
+  submitButton: {
+    marginVertical:20,
     width: 150,
-    marginLeft: 120
+    marginHorizontal: 120,
+    color: "blue"
   },
   textSubmit: {
     paddingTop: 10,
