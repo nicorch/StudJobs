@@ -54,9 +54,9 @@ const ProfilModifModal = ({ isProfilVisible, user, onCloseProfilPress, type, onS
         {({ handleChange, handleBlur, handleSubmit, values }) => (
           <View>
             <TextInput
-              onChangeText={handleChange('name')}
-              onBlur={handleBlur('name')}
-              value={values.name}
+              onChangeText={handleChange('lastName')}
+              onBlur={handleBlur('lastName')}
+              value={values.lastName}
               style={styles.inputText}
             />
             <TextInput
@@ -78,9 +78,9 @@ const ProfilModifModal = ({ isProfilVisible, user, onCloseProfilPress, type, onS
               style={styles.inputText}
             />
             <TextInput
-              onChangeText={handleChange('tel')}
-              onBlur={handleBlur('tel')}
-              value={values.tel}
+              onChangeText={handleChange('phone')}
+              onBlur={handleBlur('phone')}
+              value={values.phone}
               style={styles.inputText}
             />
             <TextInput

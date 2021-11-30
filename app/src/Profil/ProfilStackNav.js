@@ -10,16 +10,20 @@ const ProfilStackNav = () => {
     const [data, setData] = React.useState([]);
     const [loading, setLoading] = React.useState(true);
     const [user, setUser] = React.useState(null);
+    const [isPermisB, setIsPermisB] = React.useState();
+    const [isAvailable, setIsAvailable] = React.useState()
     
     const fetchData = () => {
       return (
         {
-          name: "Bidaud",
+          lastName: "Bidaud",
           firstName: "Antoine",
           city: "Bordeaux",
           age: "23",
-          tel: "0631550378",
-          adresse: "25 rue Fernand Belliard"
+          phone: "0631550378",
+          adresse: "25 rue Fernand Belliard",
+          isPermis: true,
+          isAvailable: true,
         }
       )
     }
@@ -27,10 +31,12 @@ const ProfilStackNav = () => {
     //     fetch("https://jsonplaceholder.typicode.com/todos", {
     //       headers: { "Content-Type": "application/json" },
     //     }).then((response) => response.json());
-    
+
     const fetchAndSetData = async () => {
       try {
         const serverData = await fetchData();
+
+        setUser(serverData);
         setData(serverData);
         setLoading(false);
         setUser(serverData);
@@ -54,6 +60,15 @@ const ProfilStackNav = () => {
       setUser(data);
     }
 
+    const updatePermis = (data) => {
+      setIsPermisB(data);
+    }
+
+    const updateAvailable = (data) => {
+      console.log(data);
+      setIsAvailable(data);
+    }
+
     return (
     <ProfilStack.Navigator>
       <ProfilStack.Screen
@@ -67,6 +82,8 @@ const ProfilStackNav = () => {
             loading={loading}
             setData={setData}
             setUser={updateProfil}
+            setPermis={updatePermis}
+            setAvailable={updateAvailable}
           />
         )}
 
