@@ -1,28 +1,27 @@
 import React, { createContext, useState } from "react";
+import { auth } from './../../config/firebase';
 
-import auth from "@react-native-firebase/auth"
 
-
-export const AutContext = createContext();
+export const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
     const [user, setUser] = useState(null)
 
     return (
-        <AutContext.Provider
+        <AuthContext.Provider
             value={{
                 user,
                 setUser,
                 login: async (email, password) => {
                     try {
-                        await auth().signInWithEmailAndPassword(email, password)
+                        await auth.signInWithEmailAndPassword(email, password)
                     } catch (e) {
                         console.log(e)
                     }
                 },
                 register: async (email, password) => {
                     try {
-                        await auth().createUserWithEmailAndPassword(email, password)
+                        await auth.createUserWithEmailAndPassword(email, password)
                     } catch (e) {
                         console.log(e)
                     }
@@ -30,6 +29,6 @@ export const AuthProvider = ({ children }) => {
             }}
         >
             {children}
-        </AutContext.Provider>
+        </AuthContext.Provider>
     )
 }
