@@ -23,7 +23,10 @@ const ProfilStackNav = () => {
           phone: "0631550378",
           adresse: "25 rue Fernand Belliard",
           isPermis: true,
-          isAvailable: true,
+          isAvailable: true, 
+          etude1 : 'Master 1 Concepteur développpeur d\'application - 2020',
+          etude2: 'BTS SIO option Slam - 2018',
+          etude3: 'BAC S option Physique-Chimie - 2015'
         }
       )
     }

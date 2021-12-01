@@ -32,7 +32,7 @@ const Profil = ({user, onProfilPress}) => {
       <View>
         <Card style={styles.cardImage}>
           <Image source={profilPicture} style={styles.profilePicture}/>
-          <Text style={styles.userName}>{profil.firstName} {profil.name}</Text>
+          <Text style={styles.userName}>{profil.firstName} {profil.lastName}</Text>
         </Card>
       </View>
       <View style={styles.listRow}>
@@ -66,7 +66,7 @@ const Profil = ({user, onProfilPress}) => {
         <View style={styles.listRow}>
           <Text> Numéro tel :
           </Text>
-          <Text style={styles.infoUser}>{profil.tel}</Text>
+          <Text style={styles.infoUser}>{profil.phone}</Text>
         </View>
         <View style={styles.listRow}>
           <Text> Age : 
