@@ -2,84 +2,77 @@ const categories = [
   {
     id: 1,
     name: "Baby-sitter",
-    icon: "floor-lamp",
+    icon: "mother-nurse",
     backgroundColor: "#fc5c65",
     color: "white"
   },
   {
     id: 2,
     name: "Serveur / Serveuse",
-    icon: "car",
+    icon: "bottle-wine",
     backgroundColor: "#fd9644",
     color: "white"
   },
   {
     id: 3,
     name: "Soutien scolaire",
-    icon: "camera",
+    icon: "school",
     backgroundColor: "#fed330",
     color: "white"
   },
   {
     id: 4,
     name: "Livreur",
-    icon: "cards",
+    icon: "moped",
     backgroundColor: "#26de81",
     color: "white"
   },
   {
     id: 5,
     name: "Hôte(sse) d'accueil",
-    icon: "shoe-heel",
+    icon: "human-greeting",
     backgroundColor: "#2bcbba",
     color: "white"
   },
   {
     id: 6,
     name: "Enquêteur",
-    icon: "basketball",
+    icon: "account-search",
     backgroundColor: "#45aaf2",
     color: "white"
   },
   {
     id: 7,
     name: "Distributeur",
-    icon: "headphones",
+    icon: "newspaper-variant-multiple",
     backgroundColor: "#4b7bec",
     color: "white"
   },
   {
     id: 8,
     name: "Vendeur",
-    icon: "book-open-variant",
+    icon: "account-tie-voice",
     backgroundColor: "#a55eea",
     color: "white"
   },
   {
     id: 9,
-    name: "Restaurantion",
-    icon: "book-open-variant",
+    name: "Restauration",
+    icon: "food",
     backgroundColor: "#a55eea",
     color: "white"
   },
   {
     id: 10,
-    name: "Vendeur",
-    icon: "book-open-variant",
+    name: "Polyvalent",
+    icon: "account-multiple",
     backgroundColor: "#a55eea",
     color: "white"
   },
   {
     id: 11,
-    name: "Polyvalent",
-    icon: "book-open-variant",
-    backgroundColor: "#a55eea",
-    color: "white"
-  },
-  {
-    id: 12,
-    name: "Other",
-    icon: "application",
+    name: "Autre",
+    icon: "dots-horizontal",
     backgroundColor: "#778ca3",
     color: "white"
   }

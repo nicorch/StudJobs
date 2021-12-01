@@ -12,7 +12,7 @@ function Card({ title, subTitle, type, entreprise, imageUrl, onPress }) {
           style={styles.image}
           tint="light"
           resizeMode="cover"
-          source={imageUrl}
+          source={{ uri: imageUrl }}
         />
         <View style={styles.detailsContainer}>
           <View style={styles.titleAndFav}>
