@@ -1,12 +1,14 @@
 import * as React from 'react';
-import { Text, View } from 'react-native';
+import { Button, Text, View } from 'react-native';
+import useAuth from '../hooks/useAuth';
 
 const Messages = () => {
-    return (
-        <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-        <Text>Les Messages</Text>
-        </View>
-    );
-  }
+  const { logOut } = useAuth()
+  return (
+    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+      <Button onPress={() => logOut()} />
+    </View>
+  );
+}
 
 export default Messages;

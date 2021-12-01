@@ -7,12 +7,15 @@ import colors from '../config/colors';
 import AppForm from "./../Components/forms/AppForm"
 import SubmitButton from "./../Components/forms/SubmitButton"
 import * as Yup from "yup"
+import useAuth from '../hooks/useAuth';
+import authApi from "../api/auth";
+import ErrorMessage from '../Components/forms/ErrorMessage';
 
 const choices = [{ id: 0, label: "étudiant" }, { id: 1, label: "profesionnel" }]
 
 const validationSchema = Yup.object().shape({
   email: Yup.string().required().email().label("Email"),
-  password: Yup.string().required().min(4).label("Mot de passe"),
+  password: Yup.string().required().min(6).label("Mot de passe"),
   type: Yup.string().label("Catégorie")
 })
 
@@ -27,11 +30,19 @@ function WelcomePageScreen({ navigation }) {
       setCnx(false)
   }
 
-  const handleOnSubmit = (values) => {
-    if (cnx)
-      console.log({ email: values.email, password: values.password })
-    else if (!cnx)
+  const { logIn } = useAuth()
+  const [loginFailed, setLoginFailed] = useState(false)
+
+  const handleSubmit = async ({ email, password }) => {
+    if (cnx) {
+      const result = await authApi.login(email, password)
+      if (!result.ok) return setLoginFailed(true)
+      setLoginFailed(false)
+      logIn(result.data)
+    }
+    else if (!cnx) {
       navigation.navigate("Inscription", values)
+    }
   }
 
   return (
@@ -53,8 +64,9 @@ function WelcomePageScreen({ navigation }) {
           <AppForm
             initialValues={{ email: "", password: "", type: "étudient" }}
             validationSchema={validationSchema}
-            onSubmit={handleOnSubmit}
+            onSubmit={handleSubmit}
           >
+            <ErrorMessage error="Invalid email and/or password." visible={loginFailed} />
             <AppFormField
               name="email"
               placeholder="Adresse email"

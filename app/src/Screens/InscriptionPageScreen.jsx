@@ -7,31 +7,31 @@ import AppFormField from '../Components/forms/AppFormField';
 import SubmitButton from '../Components/forms/SubmitButton';
 
 const initialV = {
-  firstname: "",
-  lastname: "",
+  firstName: "",
+  lastName: "",
   town: "",
-  adress: ""
+  address: ""
 }
 
 const validationSchemaEtud = Yup.object().shape({
-  firstname: Yup.string().required().label("Prénom"),
-  lastname: Yup.string().required().label("Nom"),
+  firstName: Yup.string().required().label("Prénom"),
+  lastName: Yup.string().required().label("Nom"),
   age: Yup.number().required().positive().label("Age"),
   phone: Yup.number().required().positive().lessThan(11).moreThan(9).label("Numéro téléphone"),
   town: Yup.string().required().label("Ville"),
-  adress: Yup.string().label("Adresse")
+  address: Yup.string().label("Adresse")
 })
 
 const validationSchemaPro = Yup.object().shape({
   companyName: Yup.string().required().label("Nom entreprise"),
-  firstname: Yup.string().label("Prénom de contact"),
-  lastname: Yup.string().label("Nom de contact"),
+  firstName: Yup.string().label("Prénom de contact"),
+  lastName: Yup.string().label("Nom de contact"),
   town: Yup.string().required().label("Ville"),
-  adress: Yup.string().label("Adresse")
+  address: Yup.string().label("Adresse")
 })
 
-const etu = { firstname: "Prénom", lastname: "Nom", adress: "Adresse complète" }
-const pro = { firstname: "Prénom de contact", lastname: "Nom de contact", adress: "Adresse de l'entreprise" }
+const etu = { firstName: "Prénom", lastName: "Nom", adress: "Adresse complète" }
+const pro = { firstName: "Prénom de contact", lastName: "Nom de contact", adress: "Adresse de l'entreprise" }
 
 function InscriptionPageScreen({ route, type = "étudiant" }) {
 
@@ -61,12 +61,12 @@ function InscriptionPageScreen({ route, type = "étudiant" }) {
               />
             }
             <AppFormField
-              name="firstname"
-              placeholder={placeholders.firstname}
+              name="firstName"
+              placeholder={placeholders.firstName}
             />
             <AppFormField
-              name="lastname"
-              placeholder={placeholders.lastname}
+              name="lastName"
+              placeholder={placeholders.lastName}
             />
             {student && (
               <>
