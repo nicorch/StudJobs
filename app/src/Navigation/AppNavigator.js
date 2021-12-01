@@ -4,6 +4,7 @@ import ProfilNavigator from './ProfilNavigator';
 import OffreNavigator from './OffreNavigator';
 import Messages from '../Messages/Messages';
 import { Ionicons } from '@expo/vector-icons';
+import ListingPageScreen from '../Screens/ListingPageScreen';
 
 const Tab = createBottomTabNavigator();
 
@@ -34,7 +35,7 @@ const AppNavigator = () => (
                 );
             },
         })}>
-        <Tab.Screen name="Offres" component={OffreNavigator} />
+        <Tab.Screen name="Offres" component={ListingPageScreen} />
         <Tab.Screen name="Messages" component={Messages} />
         <Tab.Screen name="Profil" component={ProfilNavigator} />
     </Tab.Navigator>

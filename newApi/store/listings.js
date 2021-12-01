@@ -1,38 +1,38 @@
 const listings = [
   {
     id: 1,
-    title: "Offre 1",
-    images: [{ fileName: "shoes1" }],
+    title: "Baby-sitting",
+    images: [{ fileName: "babysitting" }],
     price: 10,
     categoryId: 1,
     userId: 1,
     description: "Description Offre 1",
     type: "CDI",
-    entreprise: "Carrefour",
+    entreprise: "Mom&Pap",
     location: "Lormont"
   },
   {
     id: 2,
     title: "Offre 2",
-    images: [{ fileName: "couch1" }],
+    images: [{ fileName: "inventaire" }],
     price: 8,
     categoryId: 2,
     userId: 2,
     description: "Description Offre 2",
     type: "CDD",
-    entreprise: "Mom&Pap",
+    entreprise: "Carrefour",
     location: "Bordeaux"
   },
   {
     id: 3,
     title: "Offre 3",
-    images: [{ fileName: "jacket1" }],
+    images: [{ fileName: "soutien_scolaire" }],
     price: 12,
     categoryId: 5,
     userId: 2,
     description: "Description Offre 3",
     type: "Intérim",
-    entreprise: "Books&Coffee",
+    entreprise: "Asso Help Study",
     location: "Pessac"
   }
 ];
