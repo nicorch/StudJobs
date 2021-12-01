@@ -20,7 +20,7 @@ router.get("/", auth, (req, res) => {
 
   const mapUser = (userId) => {
     const user = usersStore.getUserById(userId);
-    return { id: user.id, name: user.name };
+    return { id: user.id, firstName: user.firstName, lastName: user.lastName, email: user.email, password: user.password, town: user.town, address: user.address, type: user.type, age: user.age, phone: user.phone, companyName: user.companyName, disponibility: user.disponibility, permis: user.permis };
   };
 
   const resources = messages.map((message) => ({

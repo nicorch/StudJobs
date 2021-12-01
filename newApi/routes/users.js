@@ -20,15 +20,14 @@ const schema = {
 };
 
 router.post("/", validateWith(schema), (req, res) => {
-  const data = req.body;
-  if (usersStore.getUserByEmail(data.email))
+  const { firstName, lastName, email, password, town, address, type, age, phone, companyName, disponibility, permis } = req.body;
+  if (usersStore.getUserByEmail(email))
     return res
       .status(400)
       .send({ error: "A user with the given email already exists." });
 
   const user = { firstName, lastName, email, password, town, address, type, age, phone, companyName, disponibility, permis };
   usersStore.addUser(user);
-
   res.status(201).send(user);
 });
 
