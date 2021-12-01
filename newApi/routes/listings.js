@@ -22,10 +22,9 @@ const schema = {
   description: Joi.string().allow(""),
   price: Joi.number().required().min(1),
   categoryId: Joi.number().required().min(1),
-  location: Joi.object({
-    latitude: Joi.number().required(),
-    longitude: Joi.number().required(),
-  }).optional(),
+  type: Joi.string().valid('CDI', 'CDD', 'Intérim', 'Vendanges').required(),
+  entreprise: Joi.string().required(),
+  location: Joi.string().required()
 };
 
 const validateCategoryId = (req, res, next) => {
@@ -44,14 +43,6 @@ router.get("/", (req, res) => {
 router.post(
   "/",
   [
-    // Order of these middleware matters.
-    // "upload" should come before other "validate" because we have to handle
-    // multi-part form data. Once the upload middleware from multer applied,
-    // request.body will be populated and we can validate it. This means
-    // if the request is invalid, we'll end up with one or more image files
-    // stored in the uploads folder. We'll need to clean up this folder
-    // using a separate process.
-    // auth,
     upload.array("images", config.get("maxImageCount")),
     validateWith(schema),
     validateCategoryId,
@@ -64,13 +55,14 @@ router.post(
       price: parseFloat(req.body.price),
       categoryId: parseInt(req.body.categoryId),
       description: req.body.description,
+      type: req.body.type,
+      entreprise: req.body.entreprise,
+      location: req.body.location
     };
+
     listing.images = req.images.map((fileName) => ({ fileName: fileName }));
-    if (req.body.location) listing.location = JSON.parse(req.body.location);
     if (req.user) listing.userId = req.user.userId;
-
     store.addListing(listing);
-
     res.status(201).send(listing);
   }
 );
