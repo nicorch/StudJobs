@@ -2,7 +2,7 @@ import * as firebase from "firebase"
 
 const firebaseConfig = {
     apiKey: "AIzaSyBFuuz0ojxgW7lVkcnDK_dHJtk8iTTcMCo",
-    authDomain: "studjobs-20f3c.firebaseapp.com",
+    authDomain: "studjob.firebaseapp.com",
     projectId: "studjobs-20f3c",
     storageBucket: "studjobs-20f3c.appspot.com",
     messagingSenderId: "780003100836",
