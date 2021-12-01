@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, StyleSheet, Text, Image, TouchableOpacity } from 'react-native';
+import { View, StyleSheet, Text, Image, TouchableOpacity, Keyboard } from 'react-native';
 import AppFormField from '../Components/forms/AppFormField';
 import AppSwitch from '../Components/AppSwitch';
 import Screen from '../Components/Screen';
@@ -22,6 +22,8 @@ const validationSchema = Yup.object().shape({
 function WelcomePageScreen({ navigation }) {
 
   const [cnx, setCnx] = useState(true)
+  const { logIn } = useAuth()
+  const [loginFailed, setLoginFailed] = useState(false)
 
   const handleToConnect = (type) => {
     if (type === "cnx")
@@ -30,10 +32,8 @@ function WelcomePageScreen({ navigation }) {
       setCnx(false)
   }
 
-  const { logIn } = useAuth()
-  const [loginFailed, setLoginFailed] = useState(false)
-
-  const handleSubmit = async ({ email, password }) => {
+  const handleSubmit = async ({ email, password, type }) => {
+    Keyboard.dismiss();
     if (cnx) {
       const result = await authApi.login(email, password)
       if (!result.ok) return setLoginFailed(true)
@@ -41,7 +41,7 @@ function WelcomePageScreen({ navigation }) {
       logIn(result.data)
     }
     else if (!cnx) {
-      navigation.navigate("Inscription", values)
+      navigation.navigate("Inscription", { email, password, type })
     }
   }
 
@@ -62,7 +62,7 @@ function WelcomePageScreen({ navigation }) {
         </View>
         <View style={styles.formContainer}>
           <AppForm
-            initialValues={{ email: "", password: "", type: "étudient" }}
+            initialValues={{ email: "", password: "", type: "étudiant" }}
             validationSchema={validationSchema}
             onSubmit={handleSubmit}
           >
@@ -72,8 +72,8 @@ function WelcomePageScreen({ navigation }) {
               placeholder="Adresse email"
               autoCapitalize="none"
               autoCorrect={false}
-              keyboardType="email-adress"
-              textContentType="emailAdress"
+              keyboardType="email-address"
+              textContentType="emailAddress"
             />
             <AppFormField
               name="password"
@@ -82,6 +82,7 @@ function WelcomePageScreen({ navigation }) {
               placeholder="Mot de passe"
               textContentType="password"
               secureTextEntry
+              pass
               icon="eye"
             />
             {

@@ -71,7 +71,7 @@ const OffreNavigator = () => {
                 {(props) => (
                     <OffresScreen
                         {...props}
-                        data={data}
+                        data={[]}
                         loading={loading}
                         setData={setData}
                         setFilters={updateFilters}

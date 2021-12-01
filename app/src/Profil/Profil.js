@@ -15,20 +15,20 @@ import BackgroundPicture from '../../assets/background_image.svg';
 
 import { Card } from '@ui-kitten/components';
 
-const Profil = (user) => {
+const Profil = (user = {}) => {
   const profil = user.user;
   const [isPermisB, setIsPermisB] = useState(profil.permisB);
   const [isAvailable, setIsAvailable] = useState(profil.isAvailable);
   const toggleSwitchPermisB = () => setIsPermisB(previousState => !previousState);
   const toggleSwitchAvailable = () => setIsAvailable(previousState => !previousState);
-  
+
   return (
-    
+
     <View>
       <BackgroundPicture style={styles.pictureBackground} />
       <View>
         <Card style={styles.cardImage}>
-          <Image source={profilPicture} style={styles.profilePicture}/>
+          <Image source={profilPicture} style={styles.profilePicture} />
           <Text style={styles.userName}>{profil.prenom} {profil.nom}</Text>
         </Card>
       </View>
@@ -46,16 +46,16 @@ const Profil = (user) => {
       </View>
       <View style={styles.cardInformations}>
         <View style={styles.listRow}>
-          <Text style={styles.title}>Vos Informations : 
+          <Text style={styles.title}>Vos Informations :
           </Text>
         </View>
         <View style={styles.listRow}>
-          <Text> Ville : 
+          <Text> Ville :
           </Text>
           <Text style={styles.infoUser}>{profil.ville}</Text>
         </View>
         <View style={styles.listRow}>
-          <Text> Adresse : 
+          <Text> Adresse :
           </Text>
           <Text style={styles.infoUser}>{profil.adresse}</Text>
         </View>
@@ -70,7 +70,7 @@ const Profil = (user) => {
           <Text style={styles.infoUser}>{profil.dateNaissance}</Text>
         </View>
         <View style={styles.listRow}>
-          <Text> Titulaire du permis B 
+          <Text> Titulaire du permis B
           </Text>
           <Switch
             trackColor={{ false: '#767577', true: 'green' }}
@@ -83,7 +83,7 @@ const Profil = (user) => {
         </View>
       </View>
       <View style={styles.cardDescription}>
-        <Text style={styles.title}>Votre description/CV : 
+        <Text style={styles.title}>Votre description/CV :
         </Text>
         <View style={styles.listRow}>
           <Text>
@@ -119,15 +119,15 @@ const styles = StyleSheet.create({
     flexDirection: 'row'
   },
   text: {
-    width:50,
+    width: 50,
   },
   listRow: {
-    flexDirection : 'row',
+    flexDirection: 'row',
     marginTop: 20,
     justifyContent: 'space-between',
   },
   pictureBackground: {
-    marginLeft:-9,
+    marginLeft: -9,
     position: 'absolute'
   },
   cardImage: {
@@ -137,11 +137,11 @@ const styles = StyleSheet.create({
     marginHorizontal: 50,
     borderBottomStartRadius: 20,
     borderBottomEndRadius: 20,
-    borderTopStartRadius:20,
-    borderTopEndRadius:20,
+    borderTopStartRadius: 20,
+    borderTopEndRadius: 20,
     borderColor: 'black',
     marginTop: 80
-    
+
   },
   userName: {
     textAlign: 'center'
@@ -149,12 +149,12 @@ const styles = StyleSheet.create({
   profilePicture: {
     width: 100,
     height: 100,
-    marginHorizontal:50,
+    marginHorizontal: 50,
     marginBottom: 20,
     borderBottomStartRadius: 50,
     borderBottomEndRadius: 50,
-    borderTopStartRadius:50,
-    borderTopEndRadius:50
+    borderTopStartRadius: 50,
+    borderTopEndRadius: 50
   },
   infoUser: {
     color: 'rgb(0,121,255)',
@@ -163,15 +163,15 @@ const styles = StyleSheet.create({
     marginTop: 20,
     borderColor: 'black',
     borderStyle: 'solid',
-    borderTopWidth:1,
-    paddingTop:0
+    borderTopWidth: 1,
+    paddingTop: 0
   },
   cardDescription: {
     marginTop: 20,
     borderColor: 'black',
     borderStyle: 'solid',
-    borderTopWidth:1,
-    paddingTop:20
+    borderTopWidth: 1,
+    paddingTop: 20
   }
 });
 

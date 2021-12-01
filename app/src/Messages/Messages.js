@@ -6,7 +6,7 @@ const Messages = () => {
   const { logOut } = useAuth()
   return (
     <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-      <Button onPress={() => logOut()} />
+      <Button title="log out" onPress={() => logOut()} />
     </View>
   );
 }

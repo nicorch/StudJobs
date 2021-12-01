@@ -63,7 +63,7 @@ const ProfilNavigator = () => {
                 {(props) => (
                     <ProfilScreen
                         {...props}
-                        user={data}
+                        user={[]}
                         loading={loading}
                         setData={setData}
                     />
