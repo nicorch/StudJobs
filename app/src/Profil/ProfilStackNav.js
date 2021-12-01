@@ -9,22 +9,24 @@ const ProfilStack = createNativeStackNavigator();
 const ProfilStackNav = () => {
     const [data, setData] = React.useState([]);
     const [loading, setLoading] = React.useState(true);
+    const [user, setUser] = React.useState(null);
+    const [isPermisB, setIsPermisB] = React.useState();
+    const [isAvailable, setIsAvailable] = React.useState()
     
     const fetchData = () => {
       return (
         {
-            _id: '1',
-            prenom : 'Antoine',
-            nom : 'Bidaud',
-            ville: 'Bordeaux',
-            adresse : '25 rue Fernand Belliard',
-            dateNaissance : '09 / 04 / 1998',
-            permisB : true,
-            tel: "06 31 55 03 78",
-            isAvailable: true,
-            etude1 : 'Master 1 Concepteur développpeur d\'application - 2020',
-            etude2: 'BTS SIO option Slam - 2018',
-            etude3: 'BAC S option Physique-Chimie - 2015'
+          lastName: "Bidaud",
+          firstName: "Antoine",
+          city: "Bordeaux",
+          age: "23",
+          phone: "0631550378",
+          adresse: "25 rue Fernand Belliard",
+          isPermis: true,
+          isAvailable: true, 
+          etude1 : 'Master 1 Concepteur développpeur d\'application - 2020',
+          etude2: 'BTS SIO option Slam - 2018',
+          etude3: 'BAC S option Physique-Chimie - 2015'
         }
       )
     }
@@ -32,12 +34,15 @@ const ProfilStackNav = () => {
     //     fetch("https://jsonplaceholder.typicode.com/todos", {
     //       headers: { "Content-Type": "application/json" },
     //     }).then((response) => response.json());
-    
+
     const fetchAndSetData = async () => {
       try {
         const serverData = await fetchData();
+
+        setUser(serverData);
         setData(serverData);
         setLoading(false);
+        setUser(serverData);
       } catch (err) {
         console.error(err);
       }
@@ -54,6 +59,19 @@ const ProfilStackNav = () => {
       initialProcessProfil();
     }, []);
     
+    const updateProfil = (data) => {
+      setUser(data);
+    }
+
+    const updatePermis = (data) => {
+      setIsPermisB(data);
+    }
+
+    const updateAvailable = (data) => {
+      console.log(data);
+      setIsAvailable(data);
+    }
+
     return (
     <ProfilStack.Navigator>
       <ProfilStack.Screen
@@ -63,9 +81,12 @@ const ProfilStackNav = () => {
       {(props) => (
           <ProfilScreen
             {...props}
-            user={data}
+            user={user}
             loading={loading}
             setData={setData}
+            setUser={updateProfil}
+            setPermis={updatePermis}
+            setAvailable={updateAvailable}
           />
         )}
 

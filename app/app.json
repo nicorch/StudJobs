@@ -17,12 +17,15 @@
       "**/*"
     ],
     "ios": {
-      "infoPlist": { 
-        "UIBackgroundModes": ["location"], 
-        "NSLocationWhenInUseUsageDescription": "text", 
-        "NSLocationAlwaysAndWhenInUseUsageDescription": "text", 
-        "NSLocationAlwaysUsageDescription": "text" }, 
-        "buildNumber": "0.0.1",
+      "infoPlist": {
+        "UIBackgroundModes": [
+          "location"
+        ],
+        "NSLocationWhenInUseUsageDescription": "text",
+        "NSLocationAlwaysAndWhenInUseUsageDescription": "text",
+        "NSLocationAlwaysUsageDescription": "text"
+      },
+      "buildNumber": "0.0.1",
       "supportsTablet": true
     },
     "android": {

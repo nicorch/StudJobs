@@ -6,7 +6,7 @@ import { Ionicons, AntDesign, MaterialCommunityIcons } from '@expo/vector-icons'
 import Messages from "./Messages/Messages";
 import OffresStackNav from "./Offres/OffresStackNav";
 import ProfilStackNav from "./Profil/ProfilStackNav";
-import AuthNavigation from "./Navigation/AuthNavigation"
+import AuthNavigation from "./Navigation/AuthNavigator"
 import NavigationTheme from "./Navigation/NavigationTheme"
 
 

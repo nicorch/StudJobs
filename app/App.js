@@ -19,7 +19,7 @@ export default function App() {
       await AsyncStorage.removeItem('filters');
     } catch (error) {
       console.log(
-        'err',error
+        'err', error
       );
     }
   },[])*/

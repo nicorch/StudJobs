@@ -1,5 +1,5 @@
 Arguments: 
-  C:\Program Files\nodejs\node.exe C:\Program Files (x86)\Yarn\bin\yarn.js
+  C:\Program Files\nodejs\node.exe C:\Program Files (x86)\Yarn\bin\yarn.js add firebase
 
 PATH: 
   C:\Program Files\Git\mingw64\bin;C:\Program Files\Git\usr\bin;C:\Users\mlotf\bin;C:\Program Files\Git\mingw64\bin;C:\Program Files\Git\usr\bin;C:\Users\mlotf\bin;C:\Users\mlotf\bin;C:\Program Files\Git\mingw64\bin;C:\Program Files\Git\usr\local\bin;C:\Program Files\Git\usr\bin;C:\Program Files\Git\usr\bin;C:\Program Files\Git\mingw64\bin;C:\Program Files\Git\usr\bin;C:\Users\mlotf\bin;C:\Program Files (x86)\Common Files\Oracle\Java\javapath;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0;C:\Windows\System32\OpenSSH;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\Program Files\NVIDIA Corporation\NVIDIA NvDLISR;C:\Program Files\Microsoft SQL Server\110\Tools\Binn;C:\Program Files\Git\cmd;C:\Program Files\nodejs;C:\Program Files (x86)\Yarn\bin;C:\Program Files\dotnet;C:\Program Files\Microsoft SQL Server\130\Tools\Binn;C:\Program Files\Microsoft SQL Server\Client SDK\ODBC\170\Tools\Binn;C:\HashiCorp\Vagrant\bin;C:\Program Files (x86)\Windows Kits\10\Windows Performance Toolkit;%SystemRoot%\system32;%SystemRoot%;%SystemRoot%\System32\Wbem;%SYSTEMROOT%\System32\WindowsPowerShell\v1.0;%SYSTEMROOT%\System32\OpenSSH;C:\Users\mlotf\AppData\Local\Programs\Python\Python39\Scripts;C:\Users\mlotf\AppData\Local\Programs\Python\Python39;C:\Ruby27-x64\bin;C:\RailsInstaller\Ruby2.3.3\bin;C:\Users\mlotf\AppData\Local\Microsoft\WindowsApps;C:\Users\mlotf\AppData\Local\Programs\Microsoft VS Code\bin;C:\Users\mlotf\AppData\Roaming\npm;C:\Users\mlotf\AppData\Local\Yarn\bin;C:\Users\mlotf\.deno\bin;C:\Users\mlotf\.dotnet\tools;C:\Users\mlotf\AppData\Local\Microsoft\WindowsApps;C:\Program Files\Git\usr\bin\vendor_perl;C:\Program Files\Git\usr\bin\core_perl
@@ -38,6 +38,8 @@ npm manifest:
       "@eva-design/eva": "^2.1.1",
       "@react-native-async-storage/async-storage": "~1.15.0",
       "@react-native-community/datetimepicker": "^3.5.2",
+      "@react-native-firebase/app": "^13.0.1",
+      "@react-native-firebase/auth": "^13.0.1",
       "@react-navigation/bottom-tabs": "^6.0.9",
       "@react-navigation/native": "^6.0.6",
       "@react-navigation/native-stack": "^6.2.5",

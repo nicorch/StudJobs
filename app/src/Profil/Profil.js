@@ -8,7 +8,7 @@ import {
   Image,
   VirtualizedList
 } from 'react-native';
-
+import { Ionicons } from '@expo/vector-icons';
 import profilPicture from '../../assets/profil_picture.jpg';
 import BackgroundPicture from '../../assets/background_image.svg';
 
@@ -21,7 +21,6 @@ const Profil = (user = {}) => {
   const [isAvailable, setIsAvailable] = useState(profil.isAvailable);
   const toggleSwitchPermisB = () => setIsPermisB(previousState => !previousState);
   const toggleSwitchAvailable = () => setIsAvailable(previousState => !previousState);
-
   return (
 
     <View>
@@ -48,11 +47,12 @@ const Profil = (user = {}) => {
         <View style={styles.listRow}>
           <Text style={styles.title}>Vos Informations :
           </Text>
+          <Ionicons name='create-outline' style={styles.editIcons} onPress={() => onProfilPress(user)} ></Ionicons>
         </View>
         <View style={styles.listRow}>
           <Text> Ville :
           </Text>
-          <Text style={styles.infoUser}>{profil.ville}</Text>
+          <Text style={styles.infoUser}>{profil.city}</Text>
         </View>
         <View style={styles.listRow}>
           <Text> Adresse :
@@ -62,12 +62,12 @@ const Profil = (user = {}) => {
         <View style={styles.listRow}>
           <Text> Numéro tel :
           </Text>
-          <Text style={styles.infoUser}>{profil.tel}</Text>
+          <Text style={styles.infoUser}>{profil.phone}</Text>
         </View>
         <View style={styles.listRow}>
-          <Text> Née le :
+          <Text> Age :
           </Text>
-          <Text style={styles.infoUser}>{profil.dateNaissance}</Text>
+          <Text style={styles.infoUser}>{profil.age}</Text>
         </View>
         <View style={styles.listRow}>
           <Text> Titulaire du permis B
