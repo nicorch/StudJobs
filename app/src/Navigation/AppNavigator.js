@@ -1,9 +1,8 @@
 import React from 'react';
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs"
-import ProfilNavigator from './ProfilNavigator';
-import Messages from '../Messages/Messages';
 import { Ionicons } from '@expo/vector-icons';
 import FeedNavigator from './FeedNavigator';
+import AccountNavigator from './AccountNavigator';
 
 const Tab = createBottomTabNavigator();
 
@@ -35,8 +34,7 @@ const AppNavigator = () => (
             },
         })}>
         <Tab.Screen name="Offres" component={FeedNavigator} />
-        <Tab.Screen name="Messages" component={Messages} />
-        <Tab.Screen name="Profil" component={ProfilNavigator} />
+        <Tab.Screen name="Profil" component={AccountNavigator} />
     </Tab.Navigator>
 )
 

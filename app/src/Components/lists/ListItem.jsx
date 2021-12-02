@@ -11,7 +11,7 @@ function ListItem({
   image,
   IconComponent,
   onPress,
-  style
+  style,
   //renderRightActions,
 }) {
   return (
