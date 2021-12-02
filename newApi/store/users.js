@@ -28,6 +28,21 @@ const users = [
     companyName: "Catie",
     disponibility: null,
     permis: null,
+  },
+  {
+    id: 3,
+    firstName: "Marc",
+    lastName: "Lyer",
+    email: "Marc@lyer.com",
+    password: "123456",
+    town: "Talence",
+    address: "",
+    type: "professionel",
+    age: null,
+    phone: null,
+    companyName: "Jobs4u",
+    disponibility: null,
+    permis: null,
   }
 ];
 

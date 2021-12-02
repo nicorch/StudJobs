@@ -9,7 +9,7 @@ import ActivityIndicator from './../Components/ActivityIndicator';
 import AppText from '../Components/AppText';
 import AppButton from '../Components/AppButton';
 
-function ListingPageScreen(props) {
+function ListingPageScreen({ navigation }) {
 
   const getListingsApi = useApi(listingsApi.getListings)
 
@@ -38,8 +38,7 @@ function ListingPageScreen(props) {
               imageUrl={item.images[0].url}
               type={item.type}
               entreprise={item.entreprise}
-            //onPress={() => navigation.navigate(routes.LISTING_DETAILS, item)}
-            //thumbnailUrl={item.images[0].thumbnailUrl}
+              onPress={() => navigation.navigate("ListingDetails", item)}
             />
           )}
         />
