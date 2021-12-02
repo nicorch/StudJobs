@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { StyleSheet, FlatList, View, Text, TouchableOpacity } from 'react-native';
+import { StyleSheet, FlatList, View, Text, TouchableOpacity, Modal, Button } from 'react-native';
 import colors from '../config/colors';
 import Screen from '../Components/Screen';
 import Card from "./../Components/Card"
@@ -10,8 +10,17 @@ import ActivityIndicator from './../Components/ActivityIndicator';
 import AppText from '../Components/AppText';
 import AppButton from '../Components/AppButton';
 import { MaterialCommunityIcons } from "@expo/vector-icons"
+import AppForm from "./../Components/forms/AppForm"
+import AppFormField from "./../Components/forms/AppFormField"
+import SubmitButton from "./../Components/forms/SubmitButton"
 
-//const wait = (timeout) => return new Promise(resolve => setTimeout(resolve, timeout));
+import * as Yup from "yup";
+
+
+const validationSchema = Yup.object().shape({
+  location: Yup.string().min(1).label("Ville"),
+});
+
 
 function ListingPageScreen({ navigation }) {
 
@@ -20,23 +29,7 @@ function ListingPageScreen({ navigation }) {
 
   const [listings, setListings] = useState([])
   const [filterActive, setFilterActive] = useState(false)
-  //const [refreshing, setRefreshing] = useState(false);
-
-  /*const onRefresh = React.useCallback(() => {
-    setRefreshing(true);
-    getListingsApi.request()
-    setListings(getListingsApi.data)
-    wait(2000).then(() => setRefreshing(false));
-  }, []);
-  
-        <ScrollView refreshControl={
-        <RefreshControl
-          refreshing={refreshing}
-          onRefresh={onRefresh}
-        />
-      }>
-
-  */
+  const [modalActive, setModalActive] = useState(false)
 
   const getAllListings = () => {
     getListingsApi.request()
@@ -48,27 +41,43 @@ function ListingPageScreen({ navigation }) {
     getCategoriesApi.request()
   }, [])
 
+  const handleSubmit = ({ location }) => {
+    setListings(getListingsApi.data)
+    console.log(location)
+    let newListings = getListingsApi.data.filter(l => l.location === location)
+    setListings(newListings)
+    setModalActive(false)
+    setFilterActive(true)
+  }
+
   return (
     <>
       <ActivityIndicator visible={getListingsApi.loading} />
-
       <Screen style={styles.screen}>
         {getListingsApi.error &&
           <>
-            <AppText></AppText>
+            <AppText>Error</AppText>
             <AppButton title="Réessayer" onPress={getListingsApi.request} />
           </>
         }
         <View style={styles.bar}>
-          <TouchableOpacity style={styles.buttonsTop} onPress={() => { setFilterActive(true); console.log(filterActive) }}>
+          <TouchableOpacity style={styles.buttonsTop} onPress={() => { setModalActive(true) }}>
             <MaterialCommunityIcons name="filter" size={27} color={colors.white} />
             <Text style={{ fontSize: 16, color: "white" }}>Filtres</Text>
           </TouchableOpacity>
+          {filterActive && (
+            <TouchableOpacity style={styles.buttonsTop} onPress={() => { setFilterActive(false) }} >
+              <MaterialCommunityIcons name="filter-remove" size={27} color={colors.white} />
+              <Text style={{ fontSize: 16, color: "white" }}>Annuler</Text>
+            </TouchableOpacity>
+          )
+          }
           <TouchableOpacity style={styles.buttonsTop} onPress={getAllListings}>
             <MaterialCommunityIcons name="refresh" size={27} color={colors.white} />
             <Text style={{ fontSize: 16, color: "white" }}>Actualiser</Text>
           </TouchableOpacity>
         </View>
+
         <FlatList
           data={filterActive ? listings : getListingsApi.data}
           keyExtractor={(listing) => listing.id.toString()}
@@ -85,6 +94,23 @@ function ListingPageScreen({ navigation }) {
           )}
         />
       </Screen>
+      <Modal visible={modalActive} animationType="slide">
+        <Screen>
+          <Button title="Fermer" onPress={() => setModalActive(false)} />
+          <View style={{ paddingHorizontal: 20 }}>
+            <AppForm
+              initialValues={{
+                location: ""
+              }}
+              onSubmit={handleSubmit}
+              validationSchema={validationSchema}
+            >
+              <AppFormField style={{ borderColor: colors.violet }} maxLength={255} name="location" placeholder="Localisation" />
+              <SubmitButton title="Valider" />
+            </AppForm>
+          </View>
+        </Screen>
+      </Modal>
     </>
   );
 }
@@ -102,5 +128,5 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
     paddingTop: 15
   },
-  buttonsTop: { width: "34%", flexDirection: "row", justifyContent: "center", alignItems: "center", backgroundColor: colors.blue, paddingVertical: 10, borderRadius: 10 }
+  buttonsTop: { width: "32%", flexDirection: "row", justifyContent: "center", alignItems: "center", backgroundColor: colors.blue, paddingVertical: 5, borderRadius: 10 }
 })
