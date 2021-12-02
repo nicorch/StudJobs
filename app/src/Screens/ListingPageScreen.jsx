@@ -38,6 +38,7 @@ function ListingPageScreen({ navigation }) {
 
   useEffect(() => {
     getListingsApi.request()
+    getCategoriesApi.request()
     console.log(getListingsApi.data)
     setListings(getListingsApi.data)
   }, [])
@@ -54,7 +55,7 @@ function ListingPageScreen({ navigation }) {
           </>
         }
         <FlatList
-          data={getListingsApi.data}
+          data={listings}
           keyExtractor={(listing) => listing.id.toString()}
           renderItem={({ item }) => (
             <Card
