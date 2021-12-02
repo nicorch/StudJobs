@@ -43,7 +43,7 @@ function ContactForm({ listing }) {
           name="message"
           numberOfLines={3}
           placeholder="Message..."
-          style={{ borderColor: colors.blue }}
+          style={{ borderColor: colors.violet }}
         />
         <SubmitButton style={{ borderColor: colors.black }} title="Envoyer Message" />
       </AppForm>

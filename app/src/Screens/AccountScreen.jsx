@@ -51,14 +51,14 @@ function AccountScreen({ navigation }) {
             <ListItem
               title={item.title}
               onPress={() => navigation.navigate(item.routeName)}
-              IconComponent={<Icon name={item.icon.name} bgColor={item.icon.bgColor} />}
+              IconComponent={<Icon name={item.icon.name} bgColor={colors.violet} />}
             />
           }
           ItemSeparatorComponent={ListItemSeperator}
         />
       </View>
       <ListItem
-        title="Log Out"
+        title="Se déconnecter"
         onPress={logOut}
         IconComponent={<Icon name="logout" bgColor={colors.danger} />}
       />

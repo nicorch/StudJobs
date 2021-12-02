@@ -11,7 +11,7 @@ function AppInputText({ name, icon, secureTextEntry, pass, stl, ...otherParams }
     return (
         <View style={[styles.container, stl]}>
             <TextInput style={styles.inputText} secureTextEntry={pass ? !showPassword : false} {...otherParams} />
-            {icon && <MaterialCommunityIcons name={!showPassword ? icon + "-outline" : icon} size={22} color={!showPassword ? colors.medium : colors.blue} style={styles.icon} onPress={() => setShowPassword(!showPassword)} />}
+            {icon && <MaterialCommunityIcons name={!showPassword ? icon + "-outline" : icon} size={22} color={!showPassword ? colors.medium : colors.violet} style={styles.icon} onPress={() => setShowPassword(!showPassword)} />}
         </View>
     );
 }

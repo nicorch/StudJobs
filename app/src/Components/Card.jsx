@@ -74,7 +74,7 @@ const styles = StyleSheet.create({
   },
   title: {
     flex: 1,
-    color: colors.blue,
+    color: colors.violet,
     fontWeight: "bold",
     marginBottom: 5
   },
