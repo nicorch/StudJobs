@@ -1,19 +1,23 @@
 import React from 'react';
-import { View, StyleSheet, Image, TouchableWithoutFeedback } from 'react-native';
+import { View, StyleSheet, Image, TouchableWithoutFeedback, ImageBackground } from 'react-native';
 import AppText from "./AppText";
 import colors from '../config/colors';
 import { MaterialCommunityIcons } from "@expo/vector-icons"
 
-function Card({ title, subTitle, type, entreprise, imageUrl, onPress }) {
+function Card({ title, subTitle, type, entreprise, imageUrl, onPress, category }) {
   return (
     <TouchableWithoutFeedback onPress={onPress}>
       <View style={styles.container}>
-        <Image
+        <ImageBackground
           style={styles.image}
           tint="light"
           resizeMode="cover"
           source={{ uri: imageUrl }}
-        />
+        >
+          {category&&<View style={{...styles.categoryIcon, backgroundColor: category.backgroundColor}}>
+            <MaterialCommunityIcons name={category.icon} size={20} color={colors.black} />
+          </View>}
+        </ImageBackground>
         <View style={styles.detailsContainer}>
           <View style={styles.titleAndFav}>
             <AppText style={styles.title} numberOfLines={1}>
@@ -49,6 +53,16 @@ const styles = StyleSheet.create({
   image: {
     width: "100%",
     height: 180,
+  },
+  categoryIcon: {
+    position: 'absolute', 
+    top: 0, 
+    right: 0, 
+    width: 40, 
+    height: 40, 
+    borderBottomStartRadius: 15, 
+    justifyContent: 'center', 
+    alignItems: 'center'
   },
   detailsContainer: {
     padding: 15,
