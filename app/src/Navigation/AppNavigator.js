@@ -4,12 +4,18 @@ import { Ionicons } from '@expo/vector-icons';
 import FeedNavigator from './FeedNavigator';
 import AccountNavigator from './AccountNavigator';
 import useNotifications from '../hooks/useNotifications';
+import users from '../api/users';
+import useAuth from '../hooks/useAuth';
+import NewListingButton from './NewListingButton';
+import ListingAddScreen from '../Screens/ListingAddScreen';
 
 const Tab = createBottomTabNavigator();
 
 const AppNavigator = () => {
 
   useNotifications();
+
+  const { user } = useAuth()
 
   return (
     <Tab.Navigator
@@ -39,6 +45,18 @@ const AppNavigator = () => {
         },
       })}>
       <Tab.Screen name="Offres" component={FeedNavigator} />
+      {
+        user.type === "professionel" &&
+        (
+          <Tab.Screen
+            name="newListing"
+            component={ListingAddScreen}
+            options={({ navigation }) => ({
+              tabBarButton: () => <NewListingButton onPress={() => navigation.navigate("newListing")} />
+            })}
+          />
+        )
+      }
       <Tab.Screen name="Profil" component={AccountNavigator} />
     </Tab.Navigator>
   )

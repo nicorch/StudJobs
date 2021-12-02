@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import colors from '../config/colors';
 
-function AppSwitch({ name, items }) {
+function AppSwitch({ name, items, style }) {
 
   const { setFieldValue, values } = useFormikContext()
 
@@ -14,20 +14,19 @@ function AppSwitch({ name, items }) {
     setFieldValue(name, items[id].label)
   }
 
+  const typeInscription = style ? { width: "30%", padding: 6 } : { width: "50%", padding: 6 }
+
   return (
     <View style={styles.types}>
-      <TouchableOpacity
-        onPress={() => handleChoice(0)}
-        style={!selectedItem ? [styles.typeInscription, styles.typeInscriptionActive] : styles.typeInscription}
-      >
-        <Text style={styles.textType}>{items[0].label}</Text>
-      </TouchableOpacity>
-      <TouchableOpacity
-        onPress={() => handleChoice(1)}
-        style={selectedItem ? [styles.typeInscription, styles.typeInscriptionActive] : styles.typeInscription}
-      >
-        <Text style={styles.textType}>{items[1].label}</Text>
-      </TouchableOpacity>
+
+      {items.map(choice => (
+        <TouchableOpacity
+          onPress={() => handleChoice(choice.id)}
+          style={selectedItem === items.indexOf(items[choice.id]) ? [typeInscription, styles.typeInscriptionActive] : typeInscription}
+        >
+          <Text style={selectedItem === items.indexOf(items[choice.id]) ? [styles.textType, styles.textTypeActive] : styles.textType}>{items[choice.id].label}</Text>
+        </TouchableOpacity>
+      ))}
     </View>
   );
 }
@@ -37,7 +36,8 @@ export default AppSwitch;
 const styles = StyleSheet.create({
   types: {
     flexDirection: "row",
-    justifyContent: "center",
+    justifyContent: "space-around",
+    alignItems: "center",
     backgroundColor: colors.medium,
     marginVertical: 10,
     borderRadius: 6,
@@ -48,12 +48,15 @@ const styles = StyleSheet.create({
     padding: 6,
   },
   typeInscriptionActive: {
-    backgroundColor: colors.white,
+    backgroundColor: colors.blue,
     borderRadius: 6,
   },
   textType: {
     textAlign: "center",
     textTransform: "capitalize",
     fontWeight: "700"
+  },
+  textTypeActive: {
+    color: colors.white
   }
 })
