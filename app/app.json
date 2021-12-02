@@ -7,8 +7,8 @@
     "icon": "./assets/icon.png",
     "splash": {
       "image": "./assets/splash.png",
-      "resizeMode": "center",
-      "width":50,
+      "resizeMode": "cover",
+      "width": 50,
       "backgroundColor": "#EDC3FF"
     },
     "updates": {
