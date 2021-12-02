@@ -19,6 +19,7 @@ import * as Yup from "yup";
 
 const validationSchema = Yup.object().shape({
   location: Yup.string().min(1).label("Ville"),
+  price: Yup.number().min(1).max(10000).label("Price").nullable(),
 });
 
 
@@ -41,11 +42,26 @@ function ListingPageScreen({ navigation }) {
     getCategoriesApi.request()
   }, [])
 
-  const handleSubmit = ({ location }) => {
+  const handleSubmit = ({ location, price }) => {
     setListings(getListingsApi.data)
-    console.log(location)
-    let newListings = getListingsApi.data.filter(l => l.location === location)
-    setListings(newListings)
+    let data = getListingsApi.data;
+    let newListings = [];
+
+    if (location !== "") {
+      newListings = data.filter(l => l.location === location)
+      setListings(newListings)
+    }
+
+    if (location === "") {
+      setListings(getListingsApi.data)
+    }
+
+    if (price) {
+      newListings = listings.filter(l => (l.price >= (price - 1)) && (l.price <= (price + 1)))
+      //newListings = listings.filter(l => l.price === price)
+      setListings(newListings)
+    }
+
     setModalActive(false)
     setFilterActive(true)
   }
@@ -100,12 +116,14 @@ function ListingPageScreen({ navigation }) {
           <View style={{ paddingHorizontal: 20 }}>
             <AppForm
               initialValues={{
-                location: ""
+                location: "",
+                price: null
               }}
               onSubmit={handleSubmit}
               validationSchema={validationSchema}
             >
               <AppFormField style={{ borderColor: colors.violet }} maxLength={255} name="location" placeholder="Localisation" />
+              <AppFormField style={{ borderColor: colors.violet }} maxLength={8} keyboardType="numeric" name="price" placeholder="Rémuniration (+- 1€)" />
               <SubmitButton title="Valider" />
             </AppForm>
           </View>

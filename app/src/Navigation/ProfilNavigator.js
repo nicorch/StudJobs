@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import ProfilScreen from '../Profil/ProfilScreen';
+import useAuth from "./../hooks/useAuth"
 
 
 const Stack = createNativeStackNavigator();
@@ -33,6 +34,7 @@ const ProfilNavigator = () => {
     //       headers: { "Content-Type": "application/json" },
     //     }).then((response) => response.json());
 
+    /*
     const fetchAndSetData = async () => {
         try {
             const serverData = await fetchData();
@@ -54,6 +56,10 @@ const ProfilNavigator = () => {
         initialProcessProfil();
     }, []);
 
+    */
+
+    const { user } = useAuth()
+
     return (
         <Stack.Navigator>
             <Stack.Screen
@@ -63,9 +69,9 @@ const ProfilNavigator = () => {
                 {(props) => (
                     <ProfilScreen
                         {...props}
-                        user={[]}
-                        loading={loading}
-                        setData={setData}
+                        user={user}
+                    //loading={loading}
+                    //setData={setData}
                     />
                 )}
             </Stack.Screen>

@@ -3,10 +3,10 @@ import { ActivityIndicator, ScrollView, View } from "react-native";
 import Profil from "./Profil";
 import ProfilModifModal from "./ProfilModifModal";
 
-const ProfilScreen = ({ user, loading, updateProfil, setUser }) => {
-    
+const ProfilScreen = ({ user }) => {
+
     const [isModalProfilVisible, setModalProfilVisible] = React.useState(false);
-    const [userUpdate, setUserUpdate] = React.useState(user); 
+    const [userUpdate, setUserUpdate] = React.useState(user);
 
     const toggleProfilHandler = (user) => {
         setModalProfilVisible(true);
@@ -17,7 +17,7 @@ const ProfilScreen = ({ user, loading, updateProfil, setUser }) => {
     }
 
     const toggleUpdateProfilHandler = (values) => {
-        
+
         setUser(values);
         setModalProfilVisible(false);
     }
@@ -25,14 +25,9 @@ const ProfilScreen = ({ user, loading, updateProfil, setUser }) => {
 
     return (
         <View>
-            {loading ? (
-            <ActivityIndicator />
-            ) : (
             <ScrollView contentContainerStyle={{ padding: 16 }}>
-                <Profil user={user} onProfilPress={toggleProfilHandler}/>
-                <ProfilModifModal isProfilVisible={isModalProfilVisible} user={user} onCloseProfilPress={toggleCloseProfilHandler} onSavePress={toggleUpdateProfilHandler}/>
+                <Profil user={user} />
             </ScrollView>
-            )}
         </View>
     );
 };

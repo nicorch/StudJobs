@@ -15,12 +15,8 @@ import BackgroundPicture from '../../assets/background_image.svg';
 
 import { Card } from '@ui-kitten/components';
 
-const Profil = (user = {}) => {
-  const profil = user.user;
-  const [isPermisB, setIsPermisB] = useState(profil.permisB);
-  const [isAvailable, setIsAvailable] = useState(profil.isAvailable);
-  const toggleSwitchPermisB = () => setIsPermisB(previousState => !previousState);
-  const toggleSwitchAvailable = () => setIsAvailable(previousState => !previousState);
+function Profil({ user }) {
+
   return (
 
     <View>
@@ -28,7 +24,7 @@ const Profil = (user = {}) => {
       <View>
         <Card style={styles.cardImage}>
           <Image source={profilPicture} style={styles.profilePicture} />
-          <Text style={styles.userName}>{profil.prenom} {profil.nom}</Text>
+          <Text style={styles.userName}>{user.firstName} {user.lastName}</Text>
         </Card>
       </View>
       <View style={styles.listRow}>
@@ -36,10 +32,9 @@ const Profil = (user = {}) => {
         </Text>
         <Switch
           trackColor={{ false: '#767577', true: 'green' }}
-          thumbColor={isAvailable ? '#f4f3f4' : '#f4f3f4'}
+          thumbColor={user.disponibility ? '#f4f3f4' : '#f4f3f4'}
           ios_backgroundColor="#3e3e3e"
-          onValueChange={toggleSwitchAvailable}
-          value={isAvailable}
+          value={user.disponibility}
           style={styles.switchStyles}
         />
       </View>
@@ -52,55 +47,30 @@ const Profil = (user = {}) => {
         <View style={styles.listRow}>
           <Text> Ville :
           </Text>
-          <Text style={styles.infoUser}>{profil.city}</Text>
+          <Text style={styles.infoUser}>{user.town}</Text>
         </View>
         <View style={styles.listRow}>
           <Text> Adresse :
           </Text>
-          <Text style={styles.infoUser}>{profil.adresse}</Text>
+          <Text style={styles.infoUser}>{user.address}</Text>
         </View>
         <View style={styles.listRow}>
           <Text> Numéro tel :
           </Text>
-          <Text style={styles.infoUser}>{profil.phone}</Text>
+          <Text style={styles.infoUser}>{user.phone}</Text>
         </View>
         <View style={styles.listRow}>
           <Text> Age :
           </Text>
-          <Text style={styles.infoUser}>{profil.age}</Text>
+          <Text style={styles.infoUser}>{user.age}</Text>
         </View>
         <View style={styles.listRow}>
           <Text> Titulaire du permis B
           </Text>
-          <Switch
-            trackColor={{ false: '#767577', true: 'green' }}
-            thumbColor={isPermisB ? '#f4f3f4' : '#f4f3f4'}
-            ios_backgroundColor="#3e3e3e"
-            onValueChange={toggleSwitchPermisB}
-            value={isPermisB}
-            style={styles.switchStyles}
-          />
+
         </View>
       </View>
-      <View style={styles.cardDescription}>
-        <Text style={styles.title}>Votre description/CV :
-        </Text>
-        <View style={styles.listRow}>
-          <Text>
-            {profil.etude1}
-          </Text>
-        </View>
-        <View style={styles.listRow}>
-          <Text>
-            {profil.etude2}
-          </Text>
-        </View>
-        <View style={styles.listRow}>
-          <Text>
-            {profil.etude3}
-          </Text>
-        </View>
-      </View>
+
     </View>
   );
 
