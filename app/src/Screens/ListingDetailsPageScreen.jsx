@@ -15,7 +15,7 @@ function ListingDetailsPageScreen({ route }) {
   const getUsersApi = useApi(usersApi.getUsers)
 
   useEffect(() => {
-    getUsersApi.request(id)
+    getUsersApi.request()
     getUsersApi.data.map(u => {
       if (u.id === route.params.userId)
         setUserOffre(u)
@@ -31,11 +31,11 @@ function ListingDetailsPageScreen({ route }) {
           <AppText style={styles.price}>{listing.price} €/h</AppText>
           <View style={{ flexDirection: "row" }}>
             <MaterialCommunityIcons name="file-document-edit" size={22} color={colors.black} />
-            <AppText style={styles.type}>{listing.type}, Chez {listing.entreprise}</AppText>
+            <AppText style={styles.type}> {listing.type}, Chez {listing.entreprise}</AppText>
           </View>
           <View style={{ flexDirection: "row" }}>
             <MaterialCommunityIcons name="map-marker" size={22} color={colors.black} />
-            <AppText style={styles.location}>{listing.location}</AppText>
+            <AppText style={styles.location}> {listing.location}</AppText>
           </View>
           <AppText style={styles.description}>{listing.description}</AppText>
           <View style={styles.userContainer}>
@@ -51,6 +51,7 @@ function ListingDetailsPageScreen({ route }) {
     </ScrollView>
   );
 }
+
 
 export default ListingDetailsPageScreen;
 
