@@ -10,7 +10,7 @@ import useAuth from "./../hooks/useAuth";
 const menuItems = [
   {
     id: 1,
-    title: "Offres enregistrées",
+    title: "Offres Favorites",
     icon: {
       name: "format-list-bulleted",
       bgColor: colors.blue
