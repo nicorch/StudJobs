@@ -49,8 +49,11 @@ function WelcomePageScreen({ navigation }) {
     <Screen>
       <View style={styles.container}>
         <View style={styles.logoContainer}>
-          <Image style={styles.logo} source={require('./../../assets/logo.jpg')} />
-          <Text style={styles.text}>Bienvenue</Text>
+          <Image style={styles.logo} source={require('./../../assets/logo_SJ.png')} />
+          <View style={styles.textContainer}>
+            <Text style={styles.text}>Stud&Jobs</Text>
+            <Text style={styles.text}>Bienvenue</Text>
+          </View>
         </View>
         <View style={styles.switcherContainer}>
           <TouchableOpacity onPress={() => handleToConnect("cnx")} style={cnx ? [styles.mode, styles.modeActive] : styles.mode}>
@@ -124,10 +127,15 @@ const styles = StyleSheet.create({
     height: 130,
     borderRadius: 65
   },
+  textContainer: {
+    paddingVertical: 10,
+    alignItems: 'center'
+  },
   text: {
     fontSize: 44,
     fontWeight: "bold",
-    paddingVertical: 16,
+    paddingVertical: 2,
+
   },
   switcherContainer: {
     position: "absolute",

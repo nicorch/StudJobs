@@ -4,6 +4,7 @@ import colors from '../config/colors';
 import Screen from '../Components/Screen';
 import Card from "./../Components/Card"
 import listingsApi from '../api/listings';
+import listingsCategories from '../api/categories';
 import useApi from "./../hooks/useApi"
 import ActivityIndicator from './../Components/ActivityIndicator';
 import AppText from '../Components/AppText';
@@ -14,6 +15,7 @@ import AppButton from '../Components/AppButton';
 function ListingPageScreen({ navigation }) {
 
   const getListingsApi = useApi(listingsApi.getListings)
+  const getCategoriesApi = useApi(listingsCategories.getCategories)
 
   const [listings, setListings] = useState([])
   //const [refreshing, setRefreshing] = useState(false);
@@ -37,6 +39,7 @@ function ListingPageScreen({ navigation }) {
   useEffect(() => {
     getListingsApi.request()
     setListings(getListingsApi.data)
+    getCategoriesApi.request()
   }, [])
 
   return (
@@ -60,6 +63,7 @@ function ListingPageScreen({ navigation }) {
               imageUrl={item.images[0].url}
               type={item.type}
               entreprise={item.entreprise}
+              category={getCategoriesApi.data.filter((i) => (i.id.toString() === item.categoryId.toString()))[0]}
               onPress={() => navigation.navigate("ListingDetails", item)}
             />
           )}
