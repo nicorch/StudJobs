@@ -59,6 +59,7 @@ function AccountScreen({ navigation }) {
       </View>
       <ListItem
         title="Log Out"
+        onPress={logOut}
         IconComponent={<Icon name="logout" bgColor={colors.danger} />}
       />
     </Screen>

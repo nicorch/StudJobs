@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { StyleSheet, View } from 'react-native';
+import { StyleSheet } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 //import AsyncStorage from '@react-native-async-storage/async-storage';
 import AppNavigator from './src/Navigation/AppNavigator';
@@ -10,6 +10,17 @@ import AuthStorage from './src/auth/storage';
 import AppLoading from 'expo-app-loading';
 import AuthContext from './src/auth/AuthContext';
 import NavigationTheme from './src/Navigation/NavigationTheme';
+import * as Notifications from 'expo-notifications';
+
+Notifications.setNotificationHandler({
+  handleNotification: async () => {
+    return {
+      shouldShowAlert: true,
+      shouldPlaySound: true,
+      shouldSetBadge: true,
+    };
+  },
+});
 
 
 export default function App() {

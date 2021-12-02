@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { View, StyleSheet, Image, ScrollView } from 'react-native';
+import { Image, StyleSheet, View, KeyboardAvoidingView, ScrollView } from 'react-native';
+import ContactForm from '../Components/ContactForm';
 import colors from "./../config/colors"
 import AppText from "./../Components/AppText"
 import { MaterialCommunityIcons } from "@expo/vector-icons"
@@ -10,7 +11,7 @@ import useApi from '../hooks/useApi';
 
 function ListingDetailsPageScreen({ route }) {
 
-  const [userOffre, setUserOffre] = useState()
+  const [userOffre, setUserOffre] = useState({ firstName: "Marc", lastName: "Lyer", companyName: "Catie" })
   const listing = route.params;
   const getUsersApi = useApi(usersApi.getUsers)
 
@@ -22,9 +23,14 @@ function ListingDetailsPageScreen({ route }) {
     })
   }, [])
 
+
+
   return (
     <ScrollView>
-      <View style={styles.container}>
+      <KeyboardAvoidingView
+        behavior="position"
+        keyboardVerticalOffset={Platform.OS === "ios" ? 0 : 100}
+      >
         <Image style={styles.image} source={{ uri: listing.images[0].url }} />
         <View style={styles.detailsContainer} >
           <AppText style={styles.title}>{listing.title}</AppText>
@@ -47,11 +53,14 @@ function ListingDetailsPageScreen({ route }) {
             />
           </View>
         </View>
-      </View>
+        <ContactForm listing={listing} />
+      </KeyboardAvoidingView>
     </ScrollView>
   );
 }
 
+//              title={userOffre["firstName"] + " " + userOffre["lastName"]}
+//subTitle={userOffre["companyName"]}
 
 export default ListingDetailsPageScreen;
 
@@ -88,6 +97,6 @@ const styles = StyleSheet.create({
   },
   userContainer: {
     marginVertical: 10,
-    marginBottom: 30,
+    marginBottom: 10,
   },
 })
