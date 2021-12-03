@@ -11,20 +11,25 @@ import {
 import { Ionicons } from '@expo/vector-icons';
 import profilPicture from '../../assets/profil_picture.jpg';
 import BackgroundPicture from '../../assets/background_image.svg';
+import useAuth from "./../hooks/useAuth"
 
 
 import { Card } from '@ui-kitten/components';
 
-function Profil({ user }) {
+function Profil() {
+
+  const { user } = useAuth();
+
+  console.log(user.lastName)
+  console.log(user['lastName'])
 
   return (
-
     <View>
       <BackgroundPicture style={styles.pictureBackground} />
       <View>
         <Card style={styles.cardImage}>
           <Image source={profilPicture} style={styles.profilePicture} />
-          <Text style={styles.userName}>{user.firstName} {user.lastName}</Text>
+          <Text style={styles.userName}>{user["firstName"]} {user["lastName"]}</Text>
         </Card>
       </View>
       <View style={styles.listRow}>
@@ -42,27 +47,27 @@ function Profil({ user }) {
         <View style={styles.listRow}>
           <Text style={styles.title}>Vos Informations :
           </Text>
-          <Ionicons name='create-outline' style={styles.editIcons} onPress={() => onProfilPress(user)} ></Ionicons>
+          <Ionicons name='create-outline' style={styles.editIcons} ></Ionicons>
         </View>
         <View style={styles.listRow}>
           <Text> Ville :
           </Text>
-          <Text style={styles.infoUser}>{user.town}</Text>
+          <Text style={styles.infoUser}>{user["town"]}</Text>
         </View>
         <View style={styles.listRow}>
           <Text> Adresse :
           </Text>
-          <Text style={styles.infoUser}>{user.address}</Text>
+          <Text style={styles.infoUser}>{user["address"]}</Text>
         </View>
         <View style={styles.listRow}>
           <Text> Numéro tel :
           </Text>
-          <Text style={styles.infoUser}>{user.phone}</Text>
+          <Text style={styles.infoUser}>{user["phone"]}</Text>
         </View>
         <View style={styles.listRow}>
           <Text> Age :
           </Text>
-          <Text style={styles.infoUser}>{user.age}</Text>
+          <Text style={styles.infoUser}>{user["age"]}</Text>
         </View>
         <View style={styles.listRow}>
           <Text> Titulaire du permis B

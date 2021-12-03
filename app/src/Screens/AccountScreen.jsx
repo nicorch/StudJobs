@@ -40,7 +40,7 @@ function AccountScreen({ navigation }) {
           title={user.firstName + " " + user.lastName}
           subTitle={user.email}
           image={require("./../../assets/profil.png")}
-          onPress={() => navigation.navigate("Profil")}
+          onPress={() => navigation.navigate("Profill")}
         />
       </View>
       <View style={styles.container}>

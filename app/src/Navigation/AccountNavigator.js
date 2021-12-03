@@ -3,13 +3,14 @@ import { createNativeStackNavigator, createStackNavigator } from "@react-navigat
 import AccountScreen from "./../Screens/AccountScreen";
 import MessagesScreen from "./../Screens/MessagesScreen";
 import ProfilNavigator from "./ProfilNavigator"
+import Profil from "../Profil/Profil";
 
 const Stack = createNativeStackNavigator();
 
 const AccountNavigator = () => (
     <Stack.Navigator>
         <Stack.Screen name="Account" component={AccountScreen} options={{ title: "Mon compte" }} />
-        <Stack.Screen name="Profil" component={ProfilNavigator} />
+        <Stack.Screen name="Profill" component={Profil} />
         <Stack.Screen name="Messages" component={MessagesScreen} />
     </Stack.Navigator>
 );

@@ -2,6 +2,7 @@ import * as React from 'react';
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import ProfilScreen from '../Profil/ProfilScreen';
 import useAuth from "./../hooks/useAuth"
+import Profil from '../Profil/Profil';
 
 
 const Stack = createNativeStackNavigator();
@@ -62,19 +63,7 @@ const ProfilNavigator = () => {
 
     return (
         <Stack.Navigator>
-            <Stack.Screen
-                name="Profil"
-                options={{ title: "Votre Compte" }}
-            >
-                {(props) => (
-                    <ProfilScreen
-                        {...props}
-                        user={user}
-                    //loading={loading}
-                    //setData={setData}
-                    />
-                )}
-            </Stack.Screen>
+            <Stack.Screen name="jjj" options={{ title: "Votre Compte" }} component={Profil} />
         </Stack.Navigator>
     );
 }
